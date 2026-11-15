@@ -2,6 +2,7 @@
     "lang": "it",
     "title": "ZuvoHome",
     "save": "Salva",
+    "information": "Informazioni",
     "alert": {
         "added": "Aggiunto con successo",
         "played": "Riproduzione avvenuta con successo",
@@ -97,6 +98,27 @@
             "year": "Anno",
             "recordLabel": "Registrazione",
             "lastPlayed": "Ultima riproduzione"
+        },
+        "movie": {
+            "originaltitle": "Titolo originale",
+            "runtime": "Durata",
+            "genre": "Generi",
+            "rating": "Votazione",
+            "votes": "Voti",
+            "year": "Anno",
+            "director": "Registi",
+            "writer": "Scritto da",
+            "studio": "Studio",
+            "tagline": "Tag line",
+            "tag": "Tags",
+            "trailer": "Trailer",
+            "set": "Set",
+            "lastplayed": "Ultima riproduzione",
+            "played": "Numero di riproduzioni",
+            "audio": "Traccia audio",
+            "file": "File",
+            "enqueue": "Accoda",
+            "play": "Guarda"
         }
     }
 }

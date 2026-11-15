@@ -50,4 +50,14 @@ class Utils {
         });
     }
 
+    static formatTime(seconds) {
+        var hh = Math.floor(seconds / 3600);
+        var mm = Math.floor((seconds - hh * 3600) / 60);
+        var ss = seconds - hh * 3600 - mm * 60;
+        var result = '';
+        if (hh > 0)
+            result = (hh < 10 ? '0' : '') + hh + ':';
+        return result + (mm < 10 ? '0' : '') + mm + ':' + (ss < 10 ? '0' : '') + ss;
+    }
+
 }

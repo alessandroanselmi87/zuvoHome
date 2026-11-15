@@ -599,6 +599,25 @@ class Api {
         });
     }
 
+    static playerGenre(id) {
+        const command = {
+            "jsonrpc": "2.0",
+            "method": "Player.Open",
+            "params": {
+                "item": {
+                    "genreid": id
+                }
+            },
+            "id": "libPlayerOpen"
+        };
+        return new Promise((resolve, reject) => {
+            Xbmc.send(JSON.stringify(command)).then((result) => {
+                Utils.getNotifications(Translation.get('alert.played', "Played Successfully"));
+                resolve(result);
+            }).catch((error) => reject(error));
+        });
+    }
+
     static playerOpenFile(path) {
         const command = {
             "jsonrpc": "2.0",
@@ -1454,6 +1473,21 @@ class Api {
         });
     }
 
+    static addEnqueueGenreVideo(id) {
+        const command = {
+            "jsonrpc": "2.0",
+            "method": "Playlist.Add",
+            "params": { "item": { "genreid": id }, "playlistid": 1 },
+            "id": "libPlaylistAdd"
+        };
+        return new Promise((resolve, reject) => {
+            Xbmc.send(JSON.stringify(command)).then(result => {
+                Utils.getNotifications(Translation.get('alert.added', "Added Successfully"));
+                resolve(result);
+            }).catch(error => reject(error));
+        });
+    }
+
     static getSongsByYears() {
         const command = {
             "jsonrpc": "2.0",
@@ -1631,6 +1665,47 @@ class Api {
                 "properties": ["name", "thumbnail", "version", "author"]
             },
             "id": "libAddons"
+        };
+        return Xbmc.send(JSON.stringify(command));
+    }
+
+    static getMovieDetails(id) {
+        const command = {
+            "jsonrpc": "2.0",
+            "method": "VideoLibrary.GetMovieDetails",
+            "params": {
+                "movieid": id,
+                "properties": [
+                    "art",
+                    "genre",
+                    "director",
+                    "plot",
+                    "title",
+                    "tag",
+                    "originaltitle",
+                    "runtime",
+                    "year",
+                    "rating",
+                    "thumbnail",
+                    "playcount",
+                    "trailer",
+                    "cast",
+                    "resume",
+                    "file",
+                    "tagline",
+                    "set",
+                    "setid",
+                    "lastplayed",
+                    "studio",
+                    "mpaa",
+                    "votes",
+                    "streamdetails",
+                    "writer",
+                    "fanart",
+                    "imdbnumber"
+                ]
+            },
+            "id": 2
         };
         return Xbmc.send(JSON.stringify(command));
     }

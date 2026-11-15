@@ -266,6 +266,11 @@ class VideoPage {
                                 <i class="fa-solid fa-folder-open rowItem__icon"></i>
                                 <span class="rowItem__span">${genre.label}</span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieGenre__enqueue" data-id="${genre.genreid}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $(`.page4 .content`).append(element);
@@ -282,6 +287,13 @@ class VideoPage {
 
                     this.breadcrumb.addItem(Translation.get('gui.video.movies.genres', 'Genres'), 4, 4);
                     this.loadMoviesByGenrePage($(event.currentTarget).data('id'));
+                });
+
+                Utils.onClick('.movieGenre__enqueue', (event) => {
+                    Loader.loader();
+                    Api.addEnqueueGenreVideo($(event.currentTarget).data('id')).then(result => {
+                        Loader.remove();
+                    });
                 });
             }
         });
@@ -379,6 +391,11 @@ class VideoPage {
                                 <i class="fa-solid fa-file rowItem__icon"></i>
                                 <span class="rowItem__span">${movie.label}</span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieYearPage__info" data-id="${movie.movieid}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $('.page5 .content').append(movieElement);
@@ -388,6 +405,10 @@ class VideoPage {
                         Api.playerOpenMovieTitle($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
+                    });
+
+                    Utils.onClick('.movieYearPage__info', (event) => {
+                        this.loadMovieInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -478,6 +499,14 @@ class VideoPage {
                                 <i class="fa-solid fa-file rowItem__icon"></i>
                                 <span class="rowItem__span">${movie.label}</span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieGenrePage__info" data-id="${movie.movieid}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieGenrePage__enqueue" data-id="${movie.movieid}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $('.page5 .content').append(element);
@@ -485,6 +514,17 @@ class VideoPage {
                     Utils.onClick('.movieGenrePage a', (event) => {
                         Loader.loader();
                         Api.playerOpenMovieTitle($(event.currentTarget).data('id')).then((result) => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.movieGenrePage__info', (event) => {
+                        this.loadMovieInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.movieGenrePage__enqueue', (event) => {
+                        Loader.loader();
+                        Api.getEnqueuePlayer($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -506,6 +546,14 @@ class VideoPage {
                                 <i class="fa-solid fa-file rowItem__icon"></i>
                                 <span class="rowItem__span">${movie.label}</span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieTitle__info" data-id="${movie.movieid}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn movieTitle__enqueue" data-id="${movie.movieid}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $(`.page4 .content`).append(element);
@@ -513,6 +561,17 @@ class VideoPage {
                     Utils.onClick('.movieTitle a', (event) => {
                         Loader.loader();
                         Api.playerOpenMovieTitle($(event.currentTarget).data('id')).then((result) => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.movieTitle__info', (event) => {
+                        this.loadMovieInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.movieTitle__enqueue', (event) => {
+                        Loader.loader();
+                        Api.getEnqueuePlayer($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -571,6 +630,159 @@ class VideoPage {
                 });
             }
         });
+    }
+
+    loadMovieInformation(id) {
+        Loader.loader();
+        Api.getMovieDetails(id).then(result => {
+            Loader.remove();
+            const movie = result.result.moviedetails;
+            let body = `
+                <div class="movieframe">
+                    <div class="title">
+                        <h1 class="underline">${movie.title}</h1>
+                    </div>
+                    <div class="textinfo">
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.originaltitle', 'Original title')}:</span>
+                            <span class="value">${movie.originaltitle}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.runtime', 'Duration')}:</span>
+                            <span class="value">${Utils.formatTime(movie.runtime)}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.genre', 'Genres')}</span>
+                            <span class="value">${movie.genre.join(', ')}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.rating', 'Rating')}:</span>
+                            <span class="value">
+                                <div class="rating">
+                                    ${this.generateStars(movie.rating)}
+                                </div>
+                            </span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.votes', 'Votes')}:</span>
+                            <span class="value">${movie.votes}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.year', 'Year')}:</span>
+                            <span class="value">${movie.year}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.director', 'Directors')}</span>
+                            <span class="value">${movie.director.join(' ')}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.writer', 'Writer')}: </span>
+                            <span class="value">${movie.writer.join(', ')}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.studio', 'Studios')}</span>
+                            <span class="value">${movie.studio.join(', ')}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.tagline', 'Tag line')}:</span>
+                            <span class="value">${movie.tagline}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.tag', 'Tags')}:</span>
+                            <span class="value">${movie.tag.join(', ')}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.trailer', 'Trailer')}:</span>
+                            <span class="value">
+                                <a href="${movie.trailer}">Link</a>
+                            </span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.set', 'Set')}:</span
+                            ><span class="value">${movie.set}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.lastplayed', 'Last played')}:</span
+                            ><span class="value">${movie.lastplayed}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.played', 'Played')}:</span>
+                            <span class="value">${movie.playcount}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">${Translation.get('gui.movie.audio', 'Audio')}</span>
+                            <span class="value">${this.getChannels(movie.streamdetails.audio)}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <span class="label">IMDB:</span>
+                            <span class="value">
+                                <a href="http://www.imdb.com/title/${movie.imdbnumber}">IMDB</a>
+                            </span>
+                        </div>
+                        <div class="movieinfo filelink">
+                            <span class="label">${Translation.get('gui.movie.file', 'File')}:</span>
+                            <span class="value">${movie.file}</span>
+                        </div>
+                        <div class="movieinfo">
+                            <p class="plot">
+                                ${movie.plot}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="movieinfo">
+                        <div class="movietags">
+                            <button class="infoqueue" data-id="${movie.movieid}">${Translation.get('gui.movie.enqueue', 'Enqueue')}</span>
+                            <button class="infoplay" data-id="${movie.movieid}">${Translation.get('gui.movie.play', 'Play')}</button>
+                        </div>
+                    </div>
+                    <h2>Cast</h2>
+                    <div class="movieinfo">
+                        <div class="cast">
+            `;
+            movie.cast.forEach((c, i) => {
+                body += `
+                            <div class="actorimg actOrder${i}">
+                                <img src="${c.thumbnail ? Utils.kodiImageToUrl(c.thumbnail) : "images/emptyActor.png"}" class="actor" />
+                                <div class="actortext">
+                                    <span class="actorname">${c.name}</span>
+                                    <span class="actorrole">${c.role}</span>
+                                </div>
+                            </div>
+                `;
+            });
+            body += `
+                        </div>
+                    </div>
+                </div>
+            `;
+            new Modal({
+                id: 'modalInformationMovie',
+                title: Translation.get('information', 'Informations'),
+                body
+            });
+
+            Utils.onClick('.infoqueue', (event) => {
+                Loader.loader();
+                Api.getEnqueuePlayer($(event.currentTarget).data('id')).then(result => {
+                    Loader.remove();
+                });
+            });
+
+            Utils.onClick('.infoplay', (event) => {
+                Loader.loader();
+                Api.playerOpenMovieTitle($(event.currentTarget).data('id')).then(result => {
+                    Loader.remove();
+                });
+            });
+        });
+    }
+
+    getChannels(audio) {
+        let item = [];
+        audio.forEach(a => {
+            item.push(`${a.channels} - ${a.language}: ${a.codec}`);
+        });
+        return item.join(', ');
     }
 
     loadTVShowTitleInformation(id) {

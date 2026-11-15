@@ -4032,3 +4032,610 @@ a:focus-visible {
         transition: none !important;
     }
 }
+
+/* =========================================
+   CINEWAVE - MOVIE INFORMATION MODAL
+   Usa le variabili di :root e l'animazione
+   @keyframes cinewaveModalIn già presenti.
+========================================= */
+
+#modalInformationMovie {
+    position: fixed;
+    inset: 0;
+    z-index: 1055;
+
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    background: rgba(5, 6, 12, .78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    padding: 25px 12px;
+}
+
+/* ==========================================
+   DIALOG / CONTENT
+========================================== */
+
+#modalInformationMovie .modal-dialog {
+    width: calc(100% - 30px);
+    max-width: 950px;
+    margin: 0 auto;
+    min-height: calc(100% - 50px);
+
+    display: flex;
+    align-items: center;
+}
+
+#modalInformationMovie .modal-content {
+    width: 100%;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+
+    border: 1px solid rgba(255, 255, 255, .09);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, .55),
+        0 0 35px rgba(155, 109, 255, .08);
+
+    animation: cinewaveModalIn .25s ease-out;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+#modalInformationMovie .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 65px;
+    padding: 16px 24px;
+
+    background: linear-gradient(110deg,
+            rgba(233, 75, 90, .12),
+            rgba(155, 109, 255, .12));
+    border-bottom: 1px solid var(--border-color);
+}
+
+#modalInformationMovie .modal-title {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: .3px;
+}
+
+#modalInformationMovie .modal-header .close {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+    padding: 0;
+
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 50%;
+
+    color: var(--text-secondary);
+    font-size: 25px;
+    line-height: 1;
+    text-shadow: none;
+
+    cursor: pointer;
+    opacity: 1;
+    transition: var(--transition);
+}
+
+#modalInformationMovie .modal-header .close__text {
+    position: absolute;
+    top: 2px;
+}
+
+#modalInformationMovie .modal-header .close:hover {
+    color: #fff;
+    background: rgba(233, 75, 90, .2);
+    border-color: var(--color-cinema);
+    transform: rotate(90deg);
+}
+
+/* ==========================================
+   BODY
+========================================== */
+
+#modalInformationMovie .modal-body {
+    padding: 25px 28px;
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg-hover) transparent;
+}
+
+#modalInformationMovie .modal-body::-webkit-scrollbar {
+    width: 7px;
+}
+
+#modalInformationMovie .modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#modalInformationMovie .modal-body::-webkit-scrollbar-thumb {
+    background: var(--bg-hover);
+    border-radius: 10px;
+}
+
+/* ==========================================
+   TITOLO
+========================================== */
+
+#modalInformationMovie .movieframe .title h1 {
+    position: relative;
+
+    margin: 0 0 25px;
+    padding-bottom: 14px;
+
+    color: var(--text-primary);
+    font-size: 29px;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -.7px;
+    overflow-wrap: anywhere;
+}
+
+#modalInformationMovie .movieframe .title h1::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 65px;
+    height: 4px;
+
+    background: linear-gradient(90deg,
+            var(--color-cinema),
+            var(--color-music));
+    border-radius: 5px;
+}
+
+/* ==========================================
+   RIGHE INFORMAZIONI (label / value)
+========================================== */
+
+#modalInformationMovie .movieinfo {
+    display: grid;
+    grid-template-columns: 175px minmax(0, 1fr);
+    align-items: start;
+    gap: 15px;
+
+    margin-bottom: 7px;
+    padding: 13px 15px;
+
+    background: rgba(255, 255, 255, .025);
+    border: 1px solid rgba(255, 255, 255, .045);
+    border-radius: 9px;
+
+    transition: background .2s ease;
+}
+
+#modalInformationMovie .movieinfo:hover {
+    background: rgba(255, 255, 255, .045);
+}
+
+#modalInformationMovie .movieinfo .label {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+#modalInformationMovie .movieinfo .value {
+    min-width: 0;
+
+    color: var(--text-primary);
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+/* Righe senza valore: nascoste (es. "Scritto da", "Tag line", "Set") */
+#modalInformationMovie .movieinfo:has(> .value:empty) {
+    display: none;
+}
+
+/* Link (Trailer, IMDB) */
+#modalInformationMovie .movieinfo .value a {
+    color: var(--color-interactive);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: var(--transition);
+}
+
+#modalInformationMovie .movieinfo .value a:hover {
+    color: var(--text-primary);
+    border-bottom-color: var(--color-interactive);
+}
+
+/* Percorso file */
+#modalInformationMovie .movieinfo.filelink .value {
+    color: var(--text-secondary);
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 12px;
+}
+
+/* Contenitori che non sono righe label/value:
+   trama, pulsanti e cast diventano blocchi liberi */
+#modalInformationMovie .movieinfo:has(> .plot),
+#modalInformationMovie .movieinfo:has(> .movietags),
+#modalInformationMovie .movieinfo:has(> .cast) {
+    display: block;
+    padding: 0;
+    background: none;
+    border: 0;
+}
+
+#modalInformationMovie .movieinfo:has(> .plot):hover,
+#modalInformationMovie .movieinfo:has(> .movietags):hover,
+#modalInformationMovie .movieinfo:has(> .cast):hover {
+    background: none;
+}
+
+/* ==========================================
+   VOTAZIONE
+========================================== */
+
+#modalInformationMovie .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+#modalInformationMovie .rating .star {
+    position: relative;
+    color: var(--bg-hover);
+    font-size: 19px;
+    line-height: 1;
+}
+
+#modalInformationMovie .rating .star-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--color-rating);
+}
+
+/* ==========================================
+   TRAMA
+========================================== */
+
+#modalInformationMovie .plot {
+    margin: 0;
+    padding: 16px 18px;
+
+    background: rgba(255, 255, 255, .025);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--color-music);
+    border-radius: 9px;
+
+    color: var(--text-secondary);
+    font-size: 13.5px;
+    line-height: 1.7;
+}
+
+/* ==========================================
+   PULSANTI (Accoda / Guarda)
+========================================== */
+
+#modalInformationMovie .movietags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 8px 0 4px;
+}
+
+#modalInformationMovie .movietags button {
+    min-width: 120px;
+    padding: 11px 24px;
+
+    border-radius: var(--radius-sm);
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .3px;
+
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#modalInformationMovie .movietags .infoplay {
+    color: #fff;
+    background: linear-gradient(110deg,
+            var(--color-cinema),
+            var(--color-music));
+    border: 1px solid transparent;
+}
+
+#modalInformationMovie .movietags .infoplay:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(233, 75, 90, .3);
+}
+
+#modalInformationMovie .movietags .infoqueue {
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    border: 1px solid rgba(255, 255, 255, .1);
+}
+
+#modalInformationMovie .movietags .infoqueue:hover {
+    background: var(--bg-hover);
+    border-color: var(--color-interactive);
+    color: var(--color-interactive);
+}
+
+/* ==========================================
+   CAST
+========================================== */
+
+#modalInformationMovie .movieframe h2 {
+    position: relative;
+
+    margin: 32px 0 18px;
+    padding-bottom: 12px;
+
+    color: var(--text-primary);
+    font-size: 20px;
+    font-weight: 750;
+}
+
+#modalInformationMovie .movieframe h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 42px;
+    height: 3px;
+
+    background: var(--color-music);
+    border-radius: 5px;
+}
+
+#modalInformationMovie .cast {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 8px;
+}
+
+#modalInformationMovie .actorimg {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    min-height: 75px;
+    padding: 10px 13px;
+
+    background: rgba(255, 255, 255, .025);
+    border: 1px solid var(--border-color);
+    border-radius: 11px;
+
+    transition: var(--transition);
+}
+
+#modalInformationMovie .actorimg:hover {
+    background: var(--bg-tertiary);
+    border-color: rgba(155, 109, 255, .35);
+    transform: translateY(-2px);
+}
+
+#modalInformationMovie .actorimg .actor {
+    display: block;
+    flex-shrink: 0;
+
+    width: 49px;
+    height: 49px;
+
+    object-fit: cover;
+    object-position: center top;
+
+    border-radius: 50%;
+    border: 2px solid rgba(155, 109, 255, .45);
+    background: var(--bg-tertiary);
+}
+
+#modalInformationMovie .actortext {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+#modalInformationMovie .actorname {
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+#modalInformationMovie .actorrole {
+    color: var(--text-secondary);
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+#modalInformationMovie .modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding: 14px 24px;
+
+    background: rgba(0, 0, 0, .12);
+    border-top: 1px solid var(--border-color);
+}
+
+#modalInformationMovie .modal-footer .btn-secondary {
+    min-width: 95px;
+    padding: 9px 20px;
+
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: var(--radius-sm);
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#modalInformationMovie .modal-footer .btn-secondary:hover {
+    color: #fff;
+    background: var(--color-cinema);
+    border-color: var(--color-cinema);
+}
+
+/* ==========================================
+   RESPONSIVE - TABLET
+========================================== */
+
+@media (max-width: 768px) {
+    #modalInformationMovie {
+        padding: 15px 10px;
+    }
+
+    #modalInformationMovie .modal-dialog {
+        width: 100%;
+        min-height: calc(100% - 30px);
+    }
+
+    #modalInformationMovie .modal-body {
+        padding: 22px 20px;
+    }
+
+    #modalInformationMovie .movieinfo {
+        grid-template-columns: 135px minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    #modalInformationMovie .movieframe .title h1 {
+        font-size: 25px;
+    }
+
+    #modalInformationMovie .cast {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
+
+/* ==========================================
+   RESPONSIVE - MOBILE
+========================================== */
+
+@media (max-width: 520px) {
+    #modalInformationMovie {
+        padding: 0;
+    }
+
+    #modalInformationMovie .modal-dialog {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+    }
+
+    #modalInformationMovie .modal-content {
+        min-height: 100vh;
+        border-radius: 0;
+    }
+
+    #modalInformationMovie .modal-header {
+        padding: 14px 17px;
+    }
+
+    #modalInformationMovie .modal-body {
+        max-height: none;
+        padding: 20px 15px;
+    }
+
+    #modalInformationMovie .movieframe .title h1 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    #modalInformationMovie .movieinfo {
+        grid-template-columns: 1fr;
+        gap: 5px;
+        padding: 11px 12px;
+    }
+
+    #modalInformationMovie .movieinfo .label {
+        color: var(--color-music);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+    }
+
+    #modalInformationMovie .movietags button {
+        flex: 1;
+    }
+
+    #modalInformationMovie .movieframe h2 {
+        margin-top: 25px;
+    }
+
+    #modalInformationMovie .cast {
+        grid-template-columns: 1fr;
+    }
+
+    #modalInformationMovie .actorimg {
+        min-height: 65px;
+        padding: 8px 10px;
+    }
+
+    #modalInformationMovie .actorimg .actor {
+        width: 43px;
+        height: 43px;
+    }
+
+    #modalInformationMovie .modal-footer {
+        padding: 12px 15px;
+    }
+}
+
+/* ==========================================
+   ACCESSIBILITÀ
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #modalInformationMovie *,
+    #modalInformationMovie *::before,
+    #modalInformationMovie *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}

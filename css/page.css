@@ -4493,3 +4493,659 @@ button:focus-visible,
         transition: none !important;
     }
 }
+
+
+/* =========================================================
+   ZUVOHOME - MOVIE INFORMATION MODAL
+   CINEMATIC VIBES DESIGN SYSTEM
+========================================================= */
+
+/* ========================================
+   OVERLAY
+======================================== */
+
+#modalInformationMovie {
+    padding: 20px;
+    background: rgba(8, 8, 15, .84);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+}
+
+/* ========================================
+   DIALOG
+======================================== */
+
+#modalInformationMovie .modal-dialog {
+    width: 100%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+/* ========================================
+   MODAL CONTENT
+======================================== */
+
+#modalInformationMovie .modal-content {
+    overflow: hidden;
+
+    color: #EDE7DD;
+    background: #211D2B;
+
+    border: 1px solid #393342;
+    border-radius: 16px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, .55),
+        0 0 25px rgba(128, 48, 71, .12);
+
+    animation: movieInfoModalIn .3s ease;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+#modalInformationMovie .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 25px;
+
+    background: #191622;
+    border-bottom: 1px solid #393342;
+}
+
+#modalInformationMovie .modal-title {
+    margin: 0;
+
+    color: #EDE7DD;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+#modalInformationMovie .modal-header .close {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+    padding: 0;
+
+    color: #A7A3AF;
+    background: #393342;
+
+    border: none;
+    border-radius: 8px;
+
+    opacity: 1;
+    text-shadow: none;
+
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 1;
+
+    transition: all .2s ease;
+}
+
+#modalInformationMovie .modal-header .close__text {
+    position: absolute;
+    top: 1px;
+}
+
+#modalInformationMovie .modal-header .close:hover {
+    color: #FFFFFF;
+    background: #803047;
+}
+
+/* ========================================
+   BODY
+======================================== */
+
+#modalInformationMovie .modal-body {
+    max-height: 76vh;
+    overflow-y: auto;
+
+    padding: 28px 30px;
+}
+
+/* Scrollbar */
+
+#modalInformationMovie .modal-body::-webkit-scrollbar {
+    width: 7px;
+}
+
+#modalInformationMovie .modal-body::-webkit-scrollbar-track {
+    background: #191622;
+    border-radius: 10px;
+}
+
+#modalInformationMovie .modal-body::-webkit-scrollbar-thumb {
+    background: #51495D;
+    border-radius: 10px;
+}
+
+#modalInformationMovie .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #803047;
+}
+
+/* ========================================
+   MOVIE FRAME
+======================================== */
+
+#modalInformationMovie .movieframe {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* ========================================
+   MOVIE TITLE
+======================================== */
+
+#modalInformationMovie .movieframe>.title {
+    margin-bottom: 22px;
+}
+
+#modalInformationMovie .movieframe>.title h1 {
+    position: relative;
+
+    margin: 0;
+    padding-bottom: 17px;
+
+    color: #E8AD55;
+    font-size: 1.9rem;
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: .3px;
+}
+
+#modalInformationMovie .movieframe>.title h1.underline::after {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 65px;
+    height: 3px;
+
+    background: #F05B61;
+    border-radius: 10px;
+}
+
+/* ========================================
+   MOVIE INFORMATION
+======================================== */
+
+#modalInformationMovie .textinfo {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Information rows */
+
+#modalInformationMovie .textinfo>.movieinfo {
+    display: grid;
+    grid-template-columns: minmax(155px, 25%) minmax(0, 1fr);
+    align-items: start;
+    gap: 18px;
+
+    min-width: 0;
+    padding: 13px 15px;
+
+    border-bottom: 1px solid rgba(57, 51, 66, .7);
+
+    transition: background .2s ease;
+}
+
+#modalInformationMovie .textinfo>.movieinfo:hover {
+    background: rgba(255, 255, 255, .025);
+}
+
+/* Labels */
+
+#modalInformationMovie .movieinfo .label {
+    color: #92909E;
+    font-size: .86rem;
+    font-weight: 650;
+    line-height: 1.6;
+}
+
+/* Values */
+
+#modalInformationMovie .movieinfo .value {
+    min-width: 0;
+
+    color: #EDE7DD;
+    font-size: .91rem;
+    font-weight: 500;
+    line-height: 1.65;
+
+    overflow-wrap: anywhere;
+}
+
+/* Links */
+
+#modalInformationMovie .movieinfo .value a {
+    color: #E8AD55;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: color .2s ease;
+}
+
+#modalInformationMovie .movieinfo .value a:hover {
+    color: #F05B61;
+    text-decoration: underline;
+}
+
+/* File path */
+
+#modalInformationMovie .movieinfo.filelink .value {
+    color: #A7A3AF;
+    font-family: monospace;
+    font-size: .82rem;
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   RATING
+======================================== */
+
+#modalInformationMovie .smallRating {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 20px;
+
+    color: #E8AD55;
+}
+
+/* ========================================
+   PLOT
+======================================== */
+
+#modalInformationMovie .movieinfo:has(.plot) {
+    display: block;
+    padding: 20px 15px;
+    border-bottom: none;
+}
+
+#modalInformationMovie .plot {
+    margin: 0;
+
+    color: #B7B2C0;
+    font-size: .92rem;
+    line-height: 1.8;
+}
+
+/* ========================================
+   MOVIE ACTIONS
+======================================== */
+
+#modalInformationMovie .movieframe>.movieinfo:has(.movietags) {
+    padding: 20px 0;
+    border: none;
+}
+
+#modalInformationMovie .movietags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* General buttons */
+
+#modalInformationMovie .movietags button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 120px;
+    min-height: 42px;
+    padding: 10px 22px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: .88rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+#modalInformationMovie .movietags button:hover {
+    transform: translateY(-2px);
+}
+
+/* Queue */
+
+#modalInformationMovie .infoqueue {
+    color: #EDE7DD;
+    background: #393342;
+    border-color: #51495D !important;
+}
+
+#modalInformationMovie .infoqueue:hover {
+    background: #51495D;
+    border-color: #E8AD55 !important;
+    box-shadow: 0 4px 15px rgba(232, 173, 85, .12);
+}
+
+/* Play */
+
+#modalInformationMovie .infoplay {
+    color: #FFFFFF;
+    background: #803047;
+    border-color: #F05B61 !important;
+}
+
+#modalInformationMovie .infoplay:hover {
+    background: #A13D55;
+    box-shadow: 0 4px 18px rgba(240, 91, 97, .22);
+}
+
+/* ========================================
+   CAST SECTION
+======================================== */
+
+#modalInformationMovie .movieframe>h2 {
+    position: relative;
+
+    margin: 24px 0 18px;
+    padding-bottom: 12px;
+
+    color: #EDE7DD;
+    font-size: 1.2rem;
+    font-weight: 750;
+}
+
+#modalInformationMovie .movieframe>h2::after {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 40px;
+    height: 3px;
+
+    background: #F05B61;
+    border-radius: 10px;
+}
+
+/* Cast grid */
+
+#modalInformationMovie .movieframe>.movieinfo:has(.cast) {
+    display: block;
+    padding: 0;
+    border: none;
+}
+
+#modalInformationMovie .cast {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+
+    width: 100%;
+}
+
+/* Actor card */
+
+#modalInformationMovie .actorimg {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    min-width: 0;
+    min-height: 94px;
+    padding: 11px 13px;
+
+    background: #191622;
+    border: 1px solid #393342;
+    border-radius: 11px;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+#modalInformationMovie .actorimg:hover {
+    background: #2C2637;
+    border-color: #803047;
+    transform: translateY(-2px);
+}
+
+/* Actor image */
+
+#modalInformationMovie .actor {
+    flex-shrink: 0;
+
+    width: 58px;
+    height: 70px;
+
+    object-fit: cover;
+    object-position: center top;
+
+    background: #393342;
+    border: 1px solid #51495D;
+    border-radius: 8px;
+}
+
+/* Actor information */
+
+#modalInformationMovie .actortext {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    min-width: 0;
+}
+
+#modalInformationMovie .actorname {
+    color: #EDE7DD;
+    font-size: .9rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+#modalInformationMovie .actorrole {
+    color: #A7A3AF;
+    font-size: .78rem;
+    line-height: 1.4;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+#modalInformationMovie .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 16px 25px;
+
+    background: #191622;
+    border-top: 1px solid #393342;
+}
+
+#modalInformationMovie .modal-footer .btn-secondary {
+    padding: 9px 24px;
+
+    color: #EDE7DD;
+    background: #393342;
+
+    border: 1px solid #51495D;
+    border-radius: 8px;
+
+    font-size: .9rem;
+    font-weight: 600;
+
+    opacity: 1;
+    text-shadow: none;
+
+    transition: all .2s ease;
+}
+
+#modalInformationMovie .modal-footer .btn-secondary:hover {
+    color: #FFFFFF;
+    background: #803047;
+    border-color: #F05B61;
+}
+
+/* ========================================
+   ANIMATION
+======================================== */
+
+@keyframes movieInfoModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+======================================== */
+
+@media (max-width: 768px) {
+
+    #modalInformationMovie .modal-dialog {
+        max-width: 95%;
+    }
+
+    #modalInformationMovie .modal-body {
+        padding: 22px;
+    }
+
+    #modalInformationMovie .textinfo>.movieinfo {
+        grid-template-columns: minmax(125px, 30%) minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    #modalInformationMovie .cast {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    #modalInformationMovie {
+        padding: 10px;
+    }
+
+    #modalInformationMovie .modal-dialog {
+        margin: 10px auto;
+        max-width: 100%;
+    }
+
+    #modalInformationMovie .modal-header {
+        padding: 16px 18px;
+    }
+
+    #modalInformationMovie .modal-body {
+        max-height: 75vh;
+        padding: 20px 15px;
+    }
+
+    #modalInformationMovie .movieframe>.title h1 {
+        font-size: 1.45rem;
+    }
+
+    #modalInformationMovie .textinfo>.movieinfo {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 12px 10px;
+    }
+
+    #modalInformationMovie .movieinfo .label {
+        font-size: .78rem;
+    }
+
+    #modalInformationMovie .movieinfo .value {
+        font-size: .88rem;
+    }
+
+    #modalInformationMovie .plot {
+        font-size: .85rem;
+    }
+
+    #modalInformationMovie .movietags {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #modalInformationMovie .movietags button {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #modalInformationMovie .movieframe>h2 {
+        margin-top: 22px;
+    }
+
+    #modalInformationMovie .actorimg {
+        gap: 12px;
+        min-height: 82px;
+        padding: 10px;
+    }
+
+    #modalInformationMovie .actor {
+        width: 52px;
+        height: 62px;
+    }
+
+    #modalInformationMovie .actorname {
+        font-size: .86rem;
+    }
+
+    #modalInformationMovie .actorrole {
+        font-size: .75rem;
+    }
+
+    #modalInformationMovie .modal-footer {
+        padding: 14px 16px;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+#modalInformationMovie button:focus-visible {
+    outline: 2px solid #E8AD55;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    #modalInformationMovie *,
+    #modalInformationMovie *::before,
+    #modalInformationMovie *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
