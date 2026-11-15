@@ -1,0 +1,16 @@
+{
+    "lang": [
+        "it",
+        "en"
+    ],
+    "themes": [
+        {
+            "label": "Cinematic Vibes",
+            "value": "page"
+        },
+        {
+            "label": "CineWave",
+            "value": "page2"
+        }
+    ]
+}
