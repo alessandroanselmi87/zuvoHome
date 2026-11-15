@@ -20,9 +20,8 @@
     </description>
     <language></language>
     <platform>all</platform>
-    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-    <forum>http://forum.kodi.tv/showthread.php?tid=112956</forum>
-    <source>https://github.com/mizaki/awxi</source>
+    <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+    <source>https://github.com/alessandroanselmi87/zuvoHome</source>
     <assets>
 			<icon>resources/icon.png</icon>
 		</assets>
