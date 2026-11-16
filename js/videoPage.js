@@ -220,7 +220,7 @@ class VideoPage {
 
     loadTVShowsByGenre() {
         Loader.loader();
-        Api.getTVShowsByGenres().then((result) => {
+        Api.getGenresByTvShow().then((result) => {
             Loader.remove();
             if (result.result && result.result.genres.length) {
                 const genres = result.result.genres;
@@ -255,7 +255,7 @@ class VideoPage {
 
     loadMoviesByGenre() {
         Loader.loader();
-        Api.getMoviesByGenre().then((result) => {
+        Api.getGenresVideo().then((result) => {
             Loader.remove();
             if (result.result && result.result.genres.length) {
                 const genres = result.result.genres;
@@ -291,7 +291,7 @@ class VideoPage {
 
                 Utils.onClick('.movieGenre__enqueue', (event) => {
                     Loader.loader();
-                    Api.addEnqueueGenreVideo($(event.currentTarget).data('id')).then(result => {
+                    Api.addPlaylistVideoByGenreId($(event.currentTarget).data('id')).then(result => {
                         Loader.remove();
                     });
                 });
@@ -301,7 +301,7 @@ class VideoPage {
 
     loadTVShowsByYearsPage(value) {
         Loader.loader();
-        Api.getTVShowsByYearsPage(value).then((result) => {
+        Api.getTvShowsByYearValue(value).then((result) => {
             Loader.remove();
             if (result.result && result.result.tvshows.length) {
                 const tvshows = result.result.tvshows;
@@ -345,7 +345,7 @@ class VideoPage {
 
     loadTvShowSeasonsPage(tvshowid, title) {
         Loader.loader();
-        Api.getTvShowSeasons(tvshowid).then((result) => {
+        Api.getSeasonsByTvShowId(tvshowid).then((result) => {
             Loader.remove();
             if (result.result && result.result.seasons.length) {
                 const seasons = result.result.seasons;
@@ -380,7 +380,7 @@ class VideoPage {
 
     loadMoviesByYearsPage(value) {
         Loader.loader();
-        Api.getMoviesByYearsPage(value).then((result) => {
+        Api.getMoviesByYearsValue(value).then((result) => {
             Loader.remove();
             if (result.result && result.result.movies.length) {
                 const movies = result.result.movies;
@@ -402,7 +402,7 @@ class VideoPage {
 
                     Utils.onClick('.movieYearPage a', (event) => {
                         Loader.loader();
-                        Api.playerOpenMovieTitle($(event.currentTarget).data('id')).then((result) => {
+                        Api.playByMovieId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -417,7 +417,7 @@ class VideoPage {
 
     loadTVShowsByGenrePage(id, title) {
         Loader.loader();
-        Api.getTVShowsByGenresValues(id).then((result) => {
+        Api.getTvShowsByGenreId(id).then((result) => {
             Loader.remove();
             if (result.result && result.result.tvshows.length) {
                 const tvshows = result.result.tvshows;
@@ -452,7 +452,7 @@ class VideoPage {
 
     loadSeasonsTVShowsByGenres(id, title) {
         Loader.loader();
-        Api.getTvShowsSeasons(id).then((result) => {
+        Api.getSeasonsByTvShowId(id).then((result) => {
             Loader.remove();
             if (result.result && result.result.seasons.length) {
                 const seasons = result.result.seasons;
@@ -488,7 +488,7 @@ class VideoPage {
 
     loadMoviesByGenrePage(id) {
         Loader.loader();
-        Api.getMoviesByGenreValue(id).then((result) => {
+        Api.getMoviesByGenreId(id).then((result) => {
             Loader.remove();
             if (result.result && result.result.movies.length) {
                 const movies = result.result.movies;
@@ -513,7 +513,7 @@ class VideoPage {
 
                     Utils.onClick('.movieGenrePage a', (event) => {
                         Loader.loader();
-                        Api.playerOpenMovieTitle($(event.currentTarget).data('id')).then((result) => {
+                        Api.playByMovieId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -524,7 +524,7 @@ class VideoPage {
 
                     Utils.onClick('.movieGenrePage__enqueue', (event) => {
                         Loader.loader();
-                        Api.getEnqueuePlayer($(event.currentTarget).data('id')).then(result => {
+                        Api.addPlaylistByMovieId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -535,7 +535,7 @@ class VideoPage {
 
     loadMoviesByTitle() {
         Loader.loader();
-        Api.getMoviesByTitle().then((result) => {
+        Api.getMovies().then((result) => {
             Loader.remove();
             if (result.result && result.result.movies.length) {
                 const movies = result.result.movies;
@@ -560,7 +560,7 @@ class VideoPage {
 
                     Utils.onClick('.movieTitle a', (event) => {
                         Loader.loader();
-                        Api.playerOpenMovieTitle($(event.currentTarget).data('id')).then((result) => {
+                        Api.playByMovieId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -571,7 +571,7 @@ class VideoPage {
 
                     Utils.onClick('.movieTitle__enqueue', (event) => {
                         Loader.loader();
-                        Api.getEnqueuePlayer($(event.currentTarget).data('id')).then(result => {
+                        Api.addPlaylistByMovieId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -582,7 +582,7 @@ class VideoPage {
 
     loadTVShowsByTitle() {
         Loader.loader();
-        Api.getTVShowsByTitle().then((result) => {
+        Api.getTVShows().then((result) => {
             Loader.remove();
             if (result.result && result.result.tvshows.length) {
                 const tvshows = result.result.tvshows;
@@ -634,7 +634,7 @@ class VideoPage {
 
     loadMovieInformation(id) {
         Loader.loader();
-        Api.getMovieDetails(id).then(result => {
+        Api.getMovieDetailsByMovieId(id).then(result => {
             Loader.remove();
             const movie = result.result.moviedetails;
             let body = `
@@ -763,14 +763,14 @@ class VideoPage {
 
             Utils.onClick('.infoqueue', (event) => {
                 Loader.loader();
-                Api.getEnqueuePlayer($(event.currentTarget).data('id')).then(result => {
+                Api.addPlaylistByMovieId($(event.currentTarget).data('id')).then(result => {
                     Loader.remove();
                 });
             });
 
             Utils.onClick('.infoplay', (event) => {
                 Loader.loader();
-                Api.playerOpenMovieTitle($(event.currentTarget).data('id')).then(result => {
+                Api.playByMovieId($(event.currentTarget).data('id')).then(result => {
                     Loader.remove();
                 });
             });
@@ -787,7 +787,7 @@ class VideoPage {
 
     loadTVShowTitleInformation(id) {
         Loader.loader();
-        Api.getTVShowDetails(id).then(result => {
+        Api.getTvShowDetailsByTvShowId(id).then(result => {
             Loader.remove();
             const info = result.result.tvshowdetails;
             let body = `
@@ -855,7 +855,7 @@ class VideoPage {
 
     loadSeasonsTVShows(id, title) {
         Loader.loader();
-        Api.getTvShowsSeasons(id).then((result) => {
+        Api.getSeasonsByTvShowId(id).then((result) => {
             Loader.remove();
             if (result.result && result.result.seasons.length) {
                 const seasons = result.result.seasons;
@@ -891,7 +891,7 @@ class VideoPage {
 
     loadTVShowsEpisodesListBySeasons(id, tvshowid) {
         Loader.loader();
-        Api.getEpisodesList(id, tvshowid).then((result) => {
+        Api.getEpisodesByTvShowIdAndSeason(id, tvshowid).then((result) => {
             Loader.remove();
             if (result.result && result.result.episodes.length) {
                 const episodes = result.result.episodes;
@@ -911,7 +911,7 @@ class VideoPage {
 
                     Utils.onClick('.episode a', (event) => {
                         Loader.loader();
-                        Api.playerOpenEpisode($(event.currentTarget).data('id')).then((result) => {
+                        Api.playByEpisodeId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -922,7 +922,7 @@ class VideoPage {
 
     loadEpisodesTVShows(id, tvshowid) {
         Loader.loader();
-        Api.getEpisodesList(id, tvshowid).then((result) => {
+        Api.getEpisodesByTvShowIdAndSeason(id, tvshowid).then((result) => {
             Loader.remove();
             if (result.result && result.result.episodes.length) {
                 const episodes = result.result.episodes;
@@ -939,7 +939,7 @@ class VideoPage {
 
                     Utils.onClick('.episode a', (event) => {
                         Loader.loader();
-                        Api.playerOpenEpisode($(event.currentTarget).data('id')).then((result) => {
+                        Api.playByEpisodeId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -950,7 +950,7 @@ class VideoPage {
 
     loadEpisodesList(id, tvshowid) {
         Loader.loader();
-        Api.getEpisodesList(id, tvshowid).then((result) => {
+        Api.getEpisodesByTvShowIdAndSeason(id, tvshowid).then((result) => {
             Loader.remove();
             if (result.result && result.result.episodes.length) {
                 const episodes = result.result.episodes;
@@ -967,7 +967,7 @@ class VideoPage {
 
                     Utils.onClick('.episode a', (event) => {
                         Loader.loader();
-                        Api.playerOpenEpisode($(event.currentTarget).data('id')).then((result) => {
+                        Api.playByEpisodeId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -1031,7 +1031,7 @@ class VideoPage {
 
     loadVideoPlaylist(file) {
         Loader.loader();
-        Api.getVideoPlaylistsItems(file).then((result) => {
+        Api.getVideoPlaylistsByDirectory(file).then((result) => {
             Loader.remove();
             if (result.result && result.result.files.length) {
                 const files = result.result.files;
@@ -1056,20 +1056,20 @@ class VideoPage {
 
                     Utils.onClick('.filePlaylist a', (event) => {
                         Loader.loader();
-                        Api.playerOpenFile($(event.currentTarget).data('file')).then((result) => {
+                        Api.playByFile($(event.currentTarget).data('file')).then((result) => {
                             Loader.remove();
                         });
                     });
 
                     Utils.onClick('.btnAddPlaylistVideo', (event) => {
                         Loader.loader();
-                        Api.addVideoFileToPlaylist($(event.currentTarget).data('file')).then((result) => {
+                        Api.addVideoByFile($(event.currentTarget).data('file')).then((result) => {
                             Loader.remove();
                         });
                     });
 
                     Utils.onClick('.btnEnqueuePlaylistVideo', (event) => {
-                        Api.getEnqueuePlayer($(event.currentTarget).data('movieid'));
+                        Api.addPlaylistByMovieId($(event.currentTarget).data('movieid'));
                     });
                 });
             }
@@ -1203,7 +1203,7 @@ class VideoPage {
 
     loadVideoMusicByYear() {
         Loader.loader();
-        Api.getVideoMusicByYear().then((result) => {
+        Api.getMusicVideoByYear().then((result) => {
             Loader.remove();
             if (result.result && result.result.files.length) {
                 const files = result.result.files;
@@ -1237,7 +1237,7 @@ class VideoPage {
 
     loadMusicVideoByYearValue(label) {
         Loader.loader();
-        Api.getMusicVideoByYearValue(label).then((result) => {
+        Api.getMusicVideoByYear(label).then((result) => {
             Loader.remove();
             if (result.result && result.result.musicvideos.length) {
                 const items = result.result.musicvideos;
@@ -1254,7 +1254,7 @@ class VideoPage {
 
                     Utils.onClick('.musicVideoYearList a', (event) => {
                         Loader.loader();
-                        Api.playerOpenMusicVideo($(event.currentTarget).data('id')).then((result) => {
+                        Api.playByMusicVideoId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -1265,7 +1265,7 @@ class VideoPage {
 
     loadVideoMusicByTitle() {
         Loader.loader();
-        Api.getVideoMusicByTitle().then((result) => {
+        Api.getMusicVideos().then((result) => {
             Loader.remove();
             if (result.result && result.result.musicvideos.length) {
                 const musicvideos = result.result.musicvideos;
@@ -1282,7 +1282,7 @@ class VideoPage {
 
                     Utils.onClick('.musicVideoTitle a', (event) => {
                         Loader.loader();
-                        Api.playerOpenMusicVideo($(event.currentTarget).data('id')).then((result) => {
+                        Api.playByMusicVideoId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -1293,7 +1293,7 @@ class VideoPage {
 
     loadVideoMusicByGenre() {
         Loader.loader();
-        Api.getVideoMusicByGenre().then((result) => {
+        Api.getGenresByMusicVideo().then((result) => {
             Loader.remove();
             if (result.result && result.result.genres.length) {
                 const genres = result.result.genres;
@@ -1327,7 +1327,7 @@ class VideoPage {
 
     loadGenreValueList(id) {
         Loader.loader();
-        Api.getMusicVideoByGenreValueList(id).then((result => {
+        Api.getMusicVideosByGenreId(id).then((result => {
             Loader.remove();
             if (result.result && result.result.musicvideos.length) {
                 const musicVideos = result.result.musicvideos;
@@ -1346,7 +1346,7 @@ class VideoPage {
 
                     Utils.onClick('.musicVideoValue__link a', (event) => {
                         Loader.loader();
-                        Api.playerOpenMusicVideo($(event.currentTarget).data('id')).then((result) => {
+                        Api.playByMusicVideoId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -1357,7 +1357,7 @@ class VideoPage {
 
     loadFilesPage() {
         Loader.loader();
-        Api.getSourcesFilesVideo().then((result) => {
+        Api.getSourcesVideo().then((result) => {
             Loader.remove();
             if (result.result && result.result.sources.length) {
                 const sources = result.result.sources;
@@ -1394,7 +1394,7 @@ class VideoPage {
         this.breadcrumb.addItem($(`.page${numPageActive}`).find('h2').text(), numPageActive, numPageActive);
 
         Loader.loader();
-        Api.getDirectory(file, "video").then((result) => {
+        Api.getDirectoryByDirectoryAndMedia(file, "video").then((result) => {
             Loader.remove();
             if (result.result && result.result.files.length) {
                 const files = result.result.files;
@@ -1417,7 +1417,7 @@ class VideoPage {
                             this.loadFilesVideo(file, $element.find('.rowItem__span').text(), numPageActive + 1);
                         } else {
                             Loader.loader();
-                            Api.playerOpenFile(file).then((result) => {
+                            Api.playByFile(file).then((result) => {
                                 Loader.remove();
                             });
                         }

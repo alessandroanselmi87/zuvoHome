@@ -98,11 +98,11 @@ class SettingsPage {
 
     loadSettings() {
         Loader.loader();
-        Api.getSettingsSections().then(sections => {
+        Api.getSectionsByExpert().then(sections => {
             const sectionId = sections.result.sections[0].id;
-            Api.getSettingsCategories(sectionId).then(categories => {
+            Api.getCategoriesBySection(sectionId).then(categories => {
                 const categoryId = categories.result.categories[0].id;
-                Api.getSettings(sectionId, categoryId).then(settings => {
+                Api.getSettingsBySectionAndCategory(sectionId, categoryId).then(settings => {
                     Loader.remove();
                     this.loadSettingsPage(sections, categories, settings);
                 });
@@ -196,9 +196,9 @@ class SettingsPage {
 
     loadSection(sectionId) {
         Loadre.loader();
-        Api.getSettingsCategories(sectionId).then(categories => {
+        Api.getCategoriesBySection(sectionId).then(categories => {
             const categoryId = categories.result.categories[0].id;
-            Api.getSettings(sectionId, categoryId).then(settings => {
+            Api.getSettingsBySectionAndCategory(sectionId, categoryId).then(settings => {
                 Loader.remove();
                 this.loadSectionPage(sectionId, categories, settings);
             });
@@ -276,7 +276,7 @@ class SettingsPage {
     loadCategory(categoryId) {
         Loader.loader();
         const sectionId = $('#pills-tab').find('.nav-link.active').attr('aria-controls');
-        Api.getSettings(sectionId, categoryId).then(settings => {
+        Api.getSettingsBySectionAndCategory(sectionId, categoryId).then(settings => {
             Loader.remove();
             this.loadCategoryPage(categoryId, settings);
         });
@@ -331,7 +331,7 @@ class SettingsPage {
             this.$btn = $(event.currentTarget);
             const type = this.$btn.data('addontype');
             Loader.loader();
-            Api.getAddons(type).then(result => {
+            Api.getAddonsByType(type).then(result => {
                 Loader.remove();
                 let body = `
                     <div>
@@ -394,7 +394,7 @@ class SettingsPage {
             if ($slider.length) {
                 const value = $slider.slider("value");
                 const id = this.getIdReverse($slider.attr('id'));
-                Api.setSettingValue(id, value);
+                Api.setSettingValueBySettingAndValue(id, value);
             } else {
                 let value = '';
                 const id = this.getIdReverse($formItemElement.attr('id'));
@@ -411,7 +411,7 @@ class SettingsPage {
                 } else if ($formItemElement.hasClass('formItem__btn')) {
                     value = $formItemElement.val();
                 }
-                Api.setSettingValue(id, value);
+                Api.setSettingValueBySettingAndValue(id, value);
             }
         });
 
@@ -427,7 +427,7 @@ class SettingsPage {
             } else if ($formItemElement.length) {
                 id = $formItemElement.attr('id');
             }
-            Api.setSettingValue(this.getIdReverse(id), value);
+            Api.setSettingValueBySettingAndValue(this.getIdReverse(id), value);
         });
     }
 

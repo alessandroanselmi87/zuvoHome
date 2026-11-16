@@ -3,6 +3,11 @@
     "title": "ZuvoHome",
     "save": "Salva",
     "information": "Informazioni",
+    "tooltip": {
+        "info": "Informazioni",
+        "enqueue": "Accoda",
+        "play": "Riproduci"
+    },
     "alert": {
         "added": "Aggiunto con successo",
         "played": "Riproduzione avvenuta con successo",
@@ -88,6 +93,7 @@
             "lang": "Lingua"
         },
         "info": {
+            "title": "Informazioni",
             "genre": "Genere",
             "description": "Descrizione",
             "tags": "Tags",
@@ -97,7 +103,9 @@
             "artists": "Artisti",
             "year": "Anno",
             "recordLabel": "Registrazione",
-            "lastPlayed": "Ultima riproduzione"
+            "lastPlayed": "Ultima riproduzione",
+            "yearactive": "Anni di attività",
+            "albumlabel": "Album"
         },
         "movie": {
             "originaltitle": "Titolo originale",

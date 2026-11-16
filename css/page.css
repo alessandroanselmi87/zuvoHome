@@ -5149,3 +5149,1077 @@ button:focus-visible,
         transition: none !important;
     }
 }
+
+
+/* =========================================================
+   ZUVOHOME - ARTIST BY TITLE
+   CINEMATIC VIBES DESIGN SYSTEM
+========================================================= */
+
+/* ========================================
+   TABLE ROW
+======================================== */
+
+.artistByTitlePage.rowItem {
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 18px;
+
+    width: 100%;
+    min-height: 82px;
+    padding: 10px 16px;
+
+    background: #211D2B;
+    border: 1px solid #393342;
+    border-radius: 10px;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+/* Hover */
+
+.artistByTitlePage.rowItem:hover {
+    background: #2C2637;
+    border-color: #803047;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .15);
+}
+
+/* ========================================
+   ARTIST IMAGE
+======================================== */
+
+.artistByTitlePage .rowItem__img {
+    display: block;
+
+    width: 58px;
+    height: 58px;
+
+    object-fit: cover;
+    object-position: center;
+
+    background: #393342;
+    border: 1px solid #51495D;
+    border-radius: 8px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .25);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+.artistByTitlePage:hover .rowItem__img {
+    border-color: rgba(240, 91, 97, .5);
+    transform: scale(1.04);
+}
+
+/* ========================================
+   ARTIST LINK
+======================================== */
+
+.artistByTitlePage .rowItem__link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-width: 0;
+
+    color: #EDE7DD;
+    font-size: .95rem;
+    font-weight: 650;
+    line-height: 1.5;
+    text-decoration: none;
+
+    overflow: hidden;
+
+    transition: color .2s ease;
+}
+
+.artistByTitlePage .rowItem__link:hover {
+    color: #F05B61;
+}
+
+/* File icon */
+
+.artistByTitlePage .rowItem__icon {
+    flex-shrink: 0;
+
+    width: 17px;
+    height: 17px;
+
+    color: #628F91;
+
+    transition:
+        color .2s ease,
+        transform .2s ease;
+}
+
+.artistByTitlePage .rowItem__link:hover .rowItem__icon {
+    color: #E8AD55;
+    transform: scale(1.1);
+}
+
+/* Artist name */
+
+.artistByTitlePage .rowItem__span {
+    display: block;
+
+    min-width: 0;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* ========================================
+   BUTTON GROUP
+======================================== */
+
+.artistByTitlePage .rowItem__btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* Information button */
+
+.artistByTitlePage .rowItem__btn-group__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 38px;
+    height: 38px;
+    padding: 0;
+
+    color: #F05B61;
+    background: #393342;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition:
+        color .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+/* Icon */
+
+.artistByTitlePage .rowItem__btn-group__btn svg {
+    width: 17px;
+    height: 17px;
+}
+
+/* Hover */
+
+.artistByTitlePage .rowItem__btn-group__btn:hover {
+    color: #FFFFFF;
+    background: #803047;
+    border-color: #F05B61;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 12px rgba(240, 91, 97, .18);
+}
+
+/* Active */
+
+.artistByTitlePage .rowItem__btn-group__btn:active {
+    transform: scale(.95);
+}
+
+/* Focus */
+
+.artistByTitlePage button:focus-visible,
+.artistByTitlePage a:focus-visible {
+    outline: 2px solid #E8AD55;
+    outline-offset: 3px;
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+======================================== */
+
+@media (max-width: 768px) {
+
+    .artistByTitlePage.rowItem {
+        grid-template-columns: 54px minmax(0, 1fr) auto;
+        gap: 14px;
+        min-height: 76px;
+        padding: 10px 13px;
+    }
+
+    .artistByTitlePage .rowItem__img {
+        width: 54px;
+        height: 54px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    .artistByTitlePage.rowItem {
+        grid-template-columns: 46px minmax(0, 1fr) auto;
+        gap: 10px;
+        min-height: 65px;
+        padding: 9px 11px;
+    }
+
+    .artistByTitlePage .rowItem__img {
+        width: 46px;
+        height: 46px;
+    }
+
+    .artistByTitlePage .rowItem__link {
+        gap: 8px;
+        font-size: .84rem;
+    }
+
+    .artistByTitlePage .rowItem__icon {
+        width: 15px;
+        height: 15px;
+    }
+
+    .artistByTitlePage .rowItem__btn-group {
+        gap: 5px;
+    }
+
+    .artistByTitlePage .rowItem__btn-group__btn {
+        width: 33px;
+        height: 33px;
+    }
+
+    .artistByTitlePage .rowItem__btn-group__btn svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - SMALL MOBILE
+======================================== */
+
+@media (max-width: 380px) {
+
+    .artistByTitlePage.rowItem {
+        grid-template-columns: 40px minmax(0, 1fr) auto;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .artistByTitlePage .rowItem__img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .artistByTitlePage .rowItem__link {
+        font-size: .78rem;
+    }
+
+    .artistByTitlePage .rowItem__btn-group__btn {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .artistByTitlePage,
+    .artistByTitlePage * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+
+/* ========================================
+   ZUVOHOME - MODAL ALBUM INFORMATION
+======================================== */
+
+/* Overlay */
+#modalAlbumInformation {
+    background: rgba(8, 8, 15, 0.78);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    padding: 20px;
+}
+
+/* Modal dialog */
+#modalAlbumInformation .modal-dialog {
+    max-width: 700px;
+    width: 100%;
+}
+
+/* Modal content */
+#modalAlbumInformation .modal-content {
+    overflow: hidden;
+
+    background: var(--surface);
+    color: var(--text);
+
+    border: 1px solid var(--surface-light);
+    border-radius: var(--radius-lg);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, .55),
+        0 0 25px rgba(128, 48, 71, .12);
+
+    animation: albumInformationModalIn .3s ease;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+#modalAlbumInformation .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 25px;
+
+    background: #191622;
+    border-bottom: 1px solid var(--surface-light);
+}
+
+#modalAlbumInformation .modal-title {
+    margin: 0;
+
+    color: var(--text);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+/* Pulsante chiusura */
+#modalAlbumInformation .modal-header .close {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+    padding: 0;
+
+    color: var(--text-muted);
+    background: var(--surface-light);
+
+    border: none;
+    border-radius: var(--radius-sm);
+
+    opacity: 1;
+    text-shadow: none;
+
+    font-size: 23px;
+    font-weight: 300;
+    line-height: 1;
+
+    transition: var(--transition);
+}
+
+#modalAlbumInformation .modal-header .close__text {
+    position: absolute;
+    top: 2px;
+}
+
+#modalAlbumInformation .modal-header .close:hover {
+    color: #FFFFFF;
+    background: var(--primary);
+}
+
+/* ========================================
+   BODY
+======================================== */
+
+#modalAlbumInformation .modal-body {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    align-items: start;
+    gap: 28px;
+
+    padding: 28px 30px;
+}
+
+/* ========================================
+   COVER / THUMBNAIL
+======================================== */
+
+#modalAlbumInformation .thumb {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+
+    box-shadow: var(--shadow);
+}
+
+#modalAlbumInformation .thumb::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(180deg,
+            transparent 65%,
+            rgba(0, 0, 0, .25));
+
+    pointer-events: none;
+}
+
+#modalAlbumInformation .thumb__img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform .35s ease;
+}
+
+#modalAlbumInformation .thumb:hover .thumb__img {
+    transform: scale(1.05);
+}
+
+/* ========================================
+   INFORMATION
+======================================== */
+
+#modalAlbumInformation .textinfo {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Titolo */
+#modalAlbumInformation .textinfo h1 {
+    position: relative;
+
+    margin: 0 0 24px;
+    padding-bottom: 16px;
+
+    color: var(--gold);
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: .5px;
+}
+
+/* Sottolineatura */
+#modalAlbumInformation .textinfo h1.underline::after {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 65px;
+    height: 3px;
+
+    background: var(--accent);
+    border-radius: 10px;
+}
+
+/* Righe informative */
+#modalAlbumInformation .movieinfo {
+    display: grid;
+    grid-template-columns: minmax(120px, 38%) minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+
+    padding: 13px 12px;
+
+    border-bottom: 1px solid var(--border);
+
+    transition: background var(--transition);
+}
+
+#modalAlbumInformation .movieinfo:hover {
+    background: rgba(255, 255, 255, .025);
+}
+
+/* Etichette */
+#modalAlbumInformation .movieinfo .label {
+    color: var(--text-muted);
+    font-size: .88rem;
+    font-weight: 600;
+}
+
+/* Valori */
+#modalAlbumInformation .movieinfo .labelinfo {
+    color: var(--text);
+    font-size: .92rem;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+/* Descrizione */
+#modalAlbumInformation .movieinfo .artistdesc {
+    margin: 0;
+
+    color: var(--text-secondary);
+    font-size: .9rem;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+#modalAlbumInformation .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 16px 25px;
+
+    background: #191622;
+    border-top: 1px solid var(--surface-light);
+}
+
+/* Pulsante Close */
+#modalAlbumInformation .modal-footer .btn-secondary {
+    padding: 9px 24px;
+
+    color: var(--text);
+    background: var(--surface-light);
+
+    border: 1px solid #51495D;
+    border-radius: var(--radius-sm);
+
+    font-size: .9rem;
+    font-weight: 600;
+
+    opacity: 1;
+    text-shadow: none;
+
+    transition: var(--transition);
+}
+
+#modalAlbumInformation .modal-footer .btn-secondary:hover {
+    color: #FFFFFF;
+    background: var(--primary);
+    border-color: var(--accent);
+
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   ANIMAZIONE
+======================================== */
+
+@keyframes albumInformationModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 600px) {
+
+    #modalAlbumInformation {
+        padding: 10px;
+    }
+
+    #modalAlbumInformation .modal-dialog {
+        margin: 10px auto;
+    }
+
+    #modalAlbumInformation .modal-header {
+        padding: 16px 18px;
+    }
+
+    #modalAlbumInformation .modal-body {
+        grid-template-columns: 1fr;
+        gap: 22px;
+
+        padding: 20px 16px;
+    }
+
+    #modalAlbumInformation .thumb {
+        width: min(190px, 70%);
+        margin: 0 auto;
+    }
+
+    #modalAlbumInformation .textinfo h1 {
+        font-size: 1.55rem;
+        margin-bottom: 20px;
+    }
+
+    #modalAlbumInformation .movieinfo {
+        grid-template-columns: 1fr;
+        gap: 5px;
+
+        padding: 12px 10px;
+    }
+
+    #modalAlbumInformation .movieinfo .label {
+        font-size: .8rem;
+    }
+
+    #modalAlbumInformation .movieinfo .labelinfo {
+        font-size: .9rem;
+    }
+
+    #modalAlbumInformation .modal-footer {
+        padding: 14px 16px;
+    }
+}
+
+/* Schermi molto piccoli */
+@media (max-width: 380px) {
+
+    #modalAlbumInformation .modal-body {
+        padding: 18px 12px;
+    }
+
+    #modalAlbumInformation .thumb {
+        width: 65%;
+    }
+
+    #modalAlbumInformation .textinfo h1 {
+        font-size: 1.4rem;
+    }
+}
+
+/* Accessibilità */
+@media (prefers-reduced-motion: reduce) {
+
+    #modalAlbumInformation .modal-content,
+    #modalAlbumInformation .thumb__img {
+        animation: none;
+        transition: none;
+    }
+}
+
+
+/* ========================================
+   ZUVOHOME - MODAL ARTIST INFORMATION
+======================================== */
+
+/* Overlay */
+#modalArtistInformation {
+    background: rgba(8, 8, 15, 0.78);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    padding: 20px;
+}
+
+/* Dialog */
+#modalArtistInformation .modal-dialog {
+    max-width: 700px;
+    width: 100%;
+}
+
+/* Modal content */
+#modalArtistInformation .modal-content {
+    overflow: hidden;
+
+    background: #211D2B;
+    color: #EDE7DD;
+
+    border: 1px solid #393342;
+    border-radius: 16px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.55),
+        0 0 25px rgba(128, 48, 71, 0.12);
+
+    animation: artistModalIn 0.3s ease;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+#modalArtistInformation .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 25px;
+
+    background: #191622;
+    border-bottom: 1px solid #393342;
+}
+
+#modalArtistInformation .modal-title {
+    margin: 0;
+
+    color: #EDE7DD;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+
+    overflow-wrap: anywhere;
+}
+
+#modalArtistInformation .modal-header .close {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 34px;
+    height: 34px;
+    padding: 0;
+
+    color: #777582;
+    background: #393342;
+
+    border: none;
+    border-radius: 8px;
+
+    opacity: 1;
+    text-shadow: none;
+
+    font-size: 23px;
+    font-weight: 300;
+    line-height: 1;
+
+    transition: all 0.2s ease;
+}
+
+#modalArtistInformation .modal-header .close__text {
+    position: absolute;
+    top: 2px;
+}
+
+#modalArtistInformation .modal-header .close:hover {
+    color: #FFFFFF;
+    background: #803047;
+}
+
+/* ========================================
+   BODY
+======================================== */
+
+#modalArtistInformation .modal-body {
+    max-height: 75vh;
+    overflow-y: auto;
+
+    padding: 28px 30px;
+}
+
+/* Custom scrollbar */
+#modalArtistInformation .modal-body::-webkit-scrollbar {
+    width: 7px;
+}
+
+#modalArtistInformation .modal-body::-webkit-scrollbar-track {
+    background: #191622;
+    border-radius: 10px;
+}
+
+#modalArtistInformation .modal-body::-webkit-scrollbar-thumb {
+    background: #51495D;
+    border-radius: 10px;
+}
+
+#modalArtistInformation .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #803047;
+}
+
+/* ========================================
+   ARTIST TITLE
+======================================== */
+
+#modalArtistInformation .modal-body>h1 {
+    position: relative;
+
+    margin: 0 0 24px;
+    padding-bottom: 16px;
+
+    color: #E8AD55;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+
+    overflow-wrap: anywhere;
+}
+
+/* Decorative underline */
+#modalArtistInformation .modal-body>h1.underline::after {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 65px;
+    height: 3px;
+
+    background: #F05B61;
+    border-radius: 10px;
+}
+
+/* ========================================
+   INFORMATION CONTAINER
+======================================== */
+
+#modalArtistInformation .textinfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Information rows - both class variants */
+#modalArtistInformation .movieinfo,
+#modalArtistInformation .movieInfo {
+    display: grid;
+    grid-template-columns: minmax(150px, 35%) minmax(0, 1fr);
+    align-items: center;
+    gap: 15px;
+
+    padding: 13px 15px;
+
+    border-bottom: 1px solid rgba(57, 51, 66, 0.7);
+
+    transition: background 0.2s ease;
+}
+
+#modalArtistInformation .movieinfo:hover,
+#modalArtistInformation .movieInfo:hover {
+    background: rgba(255, 255, 255, 0.025);
+}
+
+/* Labels */
+#modalArtistInformation .movieinfo .label,
+#modalArtistInformation .movieInfo .label {
+    color: #777582;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+/* Values */
+#modalArtistInformation .movieinfo .labelinfo,
+#modalArtistInformation .movieInfo .labelinfo {
+    color: #EDE7DD;
+    font-size: 0.92rem;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   ARTIST DESCRIPTION
+======================================== */
+
+#modalArtistInformation .artistdesc {
+    grid-column: 1 / -1;
+
+    margin: 5px 0 0;
+
+    color: #A7A3AF;
+    font-size: 0.9rem;
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+}
+
+/* Description row */
+#modalArtistInformation .movieInfo:has(.artistdesc) {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 8px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+#modalArtistInformation .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 16px 25px;
+
+    background: #191622;
+    border-top: 1px solid #393342;
+}
+
+/* Footer close button */
+#modalArtistInformation .modal-footer .btn-secondary {
+    padding: 9px 24px;
+
+    color: #EDE7DD;
+    background: #393342;
+
+    border: 1px solid #51495D;
+    border-radius: 8px;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    opacity: 1;
+    text-shadow: none;
+
+    transition: all 0.2s ease;
+}
+
+#modalArtistInformation .modal-footer .btn-secondary:hover {
+    color: #FFFFFF;
+    background: #803047;
+    border-color: #F05B61;
+
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   ANIMATION
+======================================== */
+
+@keyframes artistModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+======================================== */
+
+@media (max-width: 768px) {
+
+    #modalArtistInformation .modal-dialog {
+        max-width: 95%;
+    }
+
+    #modalArtistInformation .modal-body {
+        padding: 22px;
+    }
+
+    #modalArtistInformation .modal-body>h1 {
+        font-size: 1.8rem;
+    }
+
+    #modalArtistInformation .movieinfo,
+    #modalArtistInformation .movieInfo {
+        grid-template-columns: minmax(125px, 30%) minmax(0, 1fr);
+        gap: 12px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    #modalArtistInformation {
+        padding: 10px;
+    }
+
+    #modalArtistInformation .modal-dialog {
+        margin: 10px auto;
+        max-width: 100%;
+    }
+
+    #modalArtistInformation .modal-header {
+        padding: 16px 18px;
+    }
+
+    #modalArtistInformation .modal-title {
+        font-size: 1rem;
+    }
+
+    #modalArtistInformation .modal-body {
+        max-height: 75vh;
+        padding: 20px 15px;
+    }
+
+    #modalArtistInformation .modal-body>h1 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    #modalArtistInformation .movieinfo,
+    #modalArtistInformation .movieInfo {
+        grid-template-columns: 1fr;
+        gap: 5px;
+
+        padding: 12px 10px;
+    }
+
+    #modalArtistInformation .movieinfo .label,
+    #modalArtistInformation .movieInfo .label {
+        font-size: 0.8rem;
+    }
+
+    #modalArtistInformation .movieinfo .labelinfo,
+    #modalArtistInformation .movieInfo .labelinfo {
+        font-size: 0.88rem;
+    }
+
+    #modalArtistInformation .artistdesc {
+        font-size: 0.85rem;
+    }
+
+    #modalArtistInformation .modal-footer {
+        padding: 14px 16px;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+#modalArtistInformation button:focus-visible {
+    outline: 2px solid #E8AD55;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    #modalArtistInformation .modal-content,
+    #modalArtistInformation * {
+        animation: none !important;
+        transition: none !important;
+    }
+}

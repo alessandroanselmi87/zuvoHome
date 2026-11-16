@@ -18,7 +18,7 @@ class Footer {
             value: 0,
             stop: (event, ui) => {
                 if (this.playerId !== undefined) {
-                    Api.getSeekPlayer({ "percentage": ui.value }, this.playerId);
+                    Api.getSeekByPlayerIdAndValue({ "percentage": ui.value }, this.playerId);
                 }
             }
         });
@@ -33,7 +33,7 @@ class Footer {
             },
             create: (event, ui) => {
                 Loader.loader();
-                Api.getVolume().then((result) => {
+                Api.getVolumeAndMuted().then((result) => {
                     Loader.remove();
                     setTimeout(() => {
                         if (result.result.muted) {
@@ -104,7 +104,7 @@ class Footer {
                 Loader.remove();
             } else if ($volumeIcon.hasClass('fa-volume-xmark')) {
                 $volumeIcon.removeClass('fa-volume-xmark').addClass('fa-volume');
-                Api.getVolume().then(result => {
+                Api.getVolumeAndMuted().then(result => {
                     $('#volume-controls').slider({ value: result.result.volume });
                 });
                 $('#volume-controls').slider("enable");
@@ -116,14 +116,14 @@ class Footer {
         Utils.onClick('a.pause', (event) => {
             if (this.playerId !== undefined && !this.pause) {
                 this.pause = true;
-                Api.getPlayPause(this.playerId);
+                Api.getPlayPauseByPlayerId(this.playerId);
             }
         });
 
         Utils.onClick('a.play', (event) => {
             if (this.playerId !== undefined && this.pause) {
                 this.pause = false;
-                Api.getPlayPause(this.playerId);
+                Api.getPlayPauseByPlayerId(this.playerId);
             }
         });
 
@@ -131,10 +131,10 @@ class Footer {
             if (this.playerId !== undefined) {
                 clearInterval(this.rewindTimer);
 
-                Api.getSeekPlayer({ "seconds": -5 }, this.playerId);
+                Api.getSeekByPlayerIdAndValue({ "seconds": -5 }, this.playerId);
 
                 this.rewindTimer = setInterval(() => {
-                    Api.getSeekPlayer({ "seconds": -5 }, this.playerId);
+                    Api.getSeekByPlayerIdAndValue({ "seconds": -5 }, this.playerId);
                 }, 1000);
             }
         });
@@ -148,10 +148,10 @@ class Footer {
             if (this.playerId !== undefined) {
                 clearInterval(this.forwardTimer);
 
-                Api.getSeekPlayer({ "seconds": 5 }, this.playerId);
+                Api.getSeekByPlayerIdAndValue({ "seconds": 5 }, this.playerId);
 
                 this.forwardTimer = setInterval(() => {
-                    Api.getSeekPlayer({ "seconds": 5 }, this.playerId);
+                    Api.getSeekByPlayerIdAndValue({ "seconds": 5 }, this.playerId);
                 }, 1000);
             }
         });
@@ -163,19 +163,19 @@ class Footer {
 
         Utils.onClick('a.stop', (event) => {
             if (this.playerId !== undefined) {
-                Api.getStop(this.playerId);
+                Api.getStopByPlayerId(this.playerId);
             }
         });
 
         Utils.onClick('a.next', (event) => {
             if (this.playerId !== undefined) {
-                Api.getNextPlayer(this.playerId);
+                Api.getGoToNextByPlayerId(this.playerId);
             }
         });
 
         Utils.onClick('a.prev', (event) => {
             if (this.playerId !== undefined) {
-                Api.getPrevPlayer(this.playerId);
+                Api.getGoToPreviousByPlayerId(this.playerId);
             }
         });
     }
@@ -218,7 +218,7 @@ class Footer {
         if (this.playerId === undefined) return;
         if (this.playerType === undefined) return;
 
-        Api.getPlayerProperties(this.playerId).then((result) => {
+        Api.getProperties(this.playerId).then((result) => {
             let command;
             if (this.playerType === 'audio') {
                 command = {
@@ -267,7 +267,7 @@ class Footer {
             }
             let position = result.result.position;
             Xbmc.send(JSON.stringify(command)).then((response) => {
-                Api.getPlayerItems(this.playerId).then((res) => {
+                Api.getPlaylistItemsByPlaylistId(this.playerId).then((res) => {
                     let nextItem;
                     if (res.result.limits.total > 1 && typeof res.result.items[position + 1] !== 'undefined') {
                         nextItem = res.result.items[position + 1];

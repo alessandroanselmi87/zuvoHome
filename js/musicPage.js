@@ -137,18 +137,54 @@ class MusicPage {
                     const element = `
                         <div class="artist rowItem">
                             <a href="#" class="rowItem__link" data-id="${artist.artistid}">
-                                <i class="fa-solid fa-file rowItem__icon"></i>
+                                <i class="fa-solid fa-folder-open rowItem__icon"></i>
                                 <span class="rowItem__span">
                                     ${artist.artist}
                                 <span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn artist__info" title="${Translation.get('tooltip.info', 'Info')}" data-id="${artist.artistid}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn artist__enqueue" title="${Translation.get('tooltip.enqueue', 'Enqueue')}" data-id="${artist.artistid}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn3 rowItem__btn-group__btn artist__play" title="${Translation.get('tooltip.play', 'Play')}" data-id="${artist.artistid}">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $(`.page4 .content`).append(element);
 
                     Utils.onClick('.artist a', (event) => {
+                        $('#gui').find('.page4').hide();
+                        $('#gui').find('.page5').remove();
+                        $('#gui').find('.page').append(`
+                            <div class="page5">
+                                <h2>${$(event.currentTarget).find('.rowItem__span').text()}</h2>
+                                <div class="content"></div>
+                            </div>
+                        `);
+
+                        this.breadcrumb.addItem(Translation.get('gui.music.artists.titles', 'Titles'), 4, 4);
+                        this.loadArtistsByTitlePage($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.artist__info', (event) => {
+                        this.loadArtistInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.artist__enqueue', event => {
                         Loader.loader();
-                        Api.playerOpenArtist($(event.currentTarget).data('id')).then((result) => {
+                        Api.addPlaylistByArtistId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.artist__play', event => {
+                        Loader.loader();
+                        Api.playByArtistId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -157,9 +193,138 @@ class MusicPage {
         });
     }
 
+    loadArtistsByTitlePage(id) {
+        Loader.loader();
+        Api.getAlbumsByArtistId(id).then(result => {
+            Loader.remove();
+            if (result.result && result.result.albums) {
+                const albums = result.result.albums;
+                albums.forEach(album => {
+                    const element = `
+                        <div class="artistByTitlePage rowItem">
+                            <img src="${album.thumbnail ? Utils.kodiImageToUrl(album.thumbnail) : 'assets/images/empty_cover_music.png'}" class="rowItem__img">
+                            <a href="#" class="rowItem__link" data-id="${album.albumid}">
+                                <i class="fa-solid fa-file rowItem__icon"></i>
+                                <span class="rowItem__span">
+                                    ${album.artist.join(', ')} ${album.label}
+                                <span>
+                            </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn artistByTitlePage__info" data-id="${album.albumid}" title="${Translation.get('gui.tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn artistByTitlePage__enqueue" data-id="${album.albumid}" title="${Translation.get('gui.tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+
+                    $('.page5 .content').append(element);
+
+                    Utils.onClick('.artistByTitlePage a', (event) => {
+                        Loader.loader();
+                        Api.playByAlbumId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.artistByTitlePage__info', (event) => {
+                        this.loadAlbumInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.artistByTitlePage__enqueue', (event) => {
+                        Loader.loader();
+                        Api.addPlaylistByAlbumId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
+                });
+            }
+        });
+    }
+
+    loadAlbumInformation(id) {
+        Loader.loader();
+        Api.getAlbumDetailsByAlbumId(id).then(result => {
+            Loader.remove();
+            const album = result.result.albumdetails;
+
+            let body = `
+                <div class="thumb">
+                    <img src="${album.thumbnail ? Utils.kodiImageToUrl(album.thumbnail) : 'assets/images/empty_cover_music.png'}" class="thumb__img">
+                </div>
+                <div class="textinfo">
+                    <h1 class="underline">${album.title}</h1>
+                    <div class="movieinfo">
+                        <span class="label">${Translation.get('gui.info.artists', 'Artists')}:</span>
+                        <span class="labelinfo">${album.artist.join(', ')}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">${Translation.get('gui.info.genre', 'Genres')}:</span>
+                        <span class="labelinfo">${album.genre.join(', ')}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">${Translation.get('gui.info.albumlabel', 'Album')}:</span>
+                        <span class="labelinfo">${album.albumlabel}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">${Translation.get('gui.info.year', 'Years')}:</span>
+                        <span class="labelinfo">${album.year}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">${Translation.get('gui.info.played', 'Played')}:</span>
+                        <span class="labelinfo">${album.playcount}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">${Translation.get('gui.info.description', 'Description')}:</span>
+                        <p class="artistdesc">${album.description}</p>
+                    </div>
+                </div>
+            `;
+
+            new Modal({
+                id: 'modalAlbumInformation',
+                title: Translation.get('gui.info.title', 'Informations'),
+                body
+            })
+        });
+    }
+
+    loadArtistInformation(id) {
+        Loader.loader();
+        Api.getArtistDetailsByArtistId(id).then(result => {
+            Loader.remove();
+            const artist = result.result.artistdetails;
+
+            let body = `
+                <h1 class="underline">${artist.artist}</h1>
+                <div class="textinfo">
+                    <div class="movieinfo">
+                        <span class="label">${Translation.get('gui.info.genre', 'Genres')}</span>
+                        <span class="labelinfo">${artist.genre.join(', ')}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">${Translation.get('gui.info.yearactive', 'Active years')}:</span>
+                        <span class="labelinfo">${artist.yearsactive.join(', ')}</span>
+                    </div>
+                    <div class="movieInfo">
+                        <span class="label">${Translation.get('gui.info.description', 'Description')}:</span>
+                        <p class="artistdesc">${artist.description}</p>
+                    </div>
+                </div>
+            `;
+            new Modal({
+                id: 'modalArtistInformation',
+                title: artist.label,
+                body
+            })
+        });
+    }
+
     loadArtistsByGenre() {
         Loader.loader();
-        Api.getGenreArtists().then((result) => {
+        Api.getGenresAudio().then((result) => {
             Loader.remove();
             if (result.result && result.result.genres.length) {
                 const genres = result.result.genres;
@@ -170,6 +335,14 @@ class MusicPage {
                                 <i class="fa-solid fa-folder-open rowItem__icon"></i>
                                 <span class="rowItem__span">${genre.label}</span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn artistsByGenre__enqueue" data-id="${genre.genreid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn artistsByGenre__play" data-id="${genre.genreid}" title="${Translation.get('tooltip.play', 'Play')}">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $(`.page4 .content`).append(element);
@@ -186,16 +359,30 @@ class MusicPage {
                         `);
 
                         this.breadcrumb.addItem(Translation.get('gui.music.artists.genres', 'Genres'), 4, 4);
-                        this.loadGenresPage($element.data('id'));
+                        this.loadGenresPage($element.data('id'), $element.find('span').text());
+                    });
+
+                    Utils.onClick('.artistsByGenre__play', event => {
+                        Loader.loader();
+                        Api.playByGenreId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.artistsByGenre__enqueue', event => {
+                        Loader.loader();
+                        Api.addPlaylistMusicByGenreId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
                     });
                 });
             }
         })
     }
 
-    loadGenresPage(id) {
+    loadGenresPage(id, title) {
         Loader.loader();
-        Api.getGenreArtistByValue(id).then((result) => {
+        Api.getArtistsByGenreId(id).then((result) => {
             Loader.remove();
             if (result.result && result.result.artists.length) {
                 const artists = result.result.artists;
@@ -203,18 +390,171 @@ class MusicPage {
                     const element = `
                         <div class="artistByGenrePage rowItem">
                             <a href="#" class="rowItem__link" data-id="${artist.artistid}">
-                                <i class="fa-solid fa-file rowItem__icon"></i>
+                                <i class="fa-solid fa-folder-open rowItem__icon"></i>
                                 <span class="rowItem__span">
                                     ${artist.artist}
                                 </span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn artistByGenrePage__info" data-id="${artist.artistid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn artistByGenrePage__enqueue" data-id="${artist.artistid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn3 rowItem__btn-group__btn artistByGenrePage__play" data-id="${artist.artistid}" title="${Translation.get('tooltip.play', 'Play')}">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $(`.page5 .content`).append(element);
 
                     Utils.onClick('.artistByGenrePage a', (event) => {
+                        const $element = $(event.currentTarget);
+                        $('.page5').hide();
+                        $('#gui').find('.page6').remove();
+                        $('#gui').find('.page').append(`
+                            <div class="page6">
+                                <h2>${$element.find('span').text()}</h2>
+                                <div class="content"></div>
+                            </div>
+                        `);
+
+                        this.breadcrumb.addItem(title, 5, 5);
+                        this.loadSongsByGenrePage($element.data('id'), $element.find('span').text());
+                    });
+
+                    Utils.onClick('.artistByGenrePage__info', event => {
+                        this.loadArtistInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.artistByGenrePage__enqueue', event => {
                         Loader.loader();
-                        Api.playerOpenArtist($(event.currentTarget).data('id')).then((result) => {
+                        Api.addPlaylistByArtistId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.artistByGenrePage__play', event => {
+                        Loader.loader();
+                        Api.playByArtistId($(event.currentTarget).data('id')).then((result) => {
+                            Loader.remove();
+                        });
+                    });
+                });
+            }
+        });
+    }
+
+    loadSongsByGenrePage(id, title) {
+        Loader.loader();
+        Api.getAlbumsByArtistId(id).then(result => {
+            Loader.remove();
+            if (result.result && result.result.albums.length) {
+                const albums = result.result.albums;
+                albums.forEach(album => {
+                    const element = `
+                        <div class="songsByGenrePage rowItem">
+                            <a href="#" class="rowItem__link" data-id="${album.albumid}">
+                                <i class="fa-solid fa-folder-open rowItem__icon"></i>
+                                <span class="rowItem__span">
+                                    ${album.artist.join(', ')} ${album.label}
+                                </span>
+                            </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn songsByGenrePage__info" data-id="${album.albumid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn songsByGenrePage__enqueue" data-id="${album.albumid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn songsByGenrePage__play" data-id="${album.albumid}" title="${Translation.get('tooltip.play', 'Play')}">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    $('.page6 .content').append(element);
+
+                    Utils.onClick('.songsByGenrePage a', (event) => {
+                        const $element = $(event.currentTarget);
+                        $('.page6').hide();
+                        $('#gui').find('.page7').remove();
+                        $('#gui').find('.page').append(`
+                            <div class="page7">
+                                <h2>${$element.find('span').text()}</h2>
+                                <div class="content"></div>
+                            </div>
+                        `);
+
+                        this.breadcrumb.addItem(title, 6, 6);
+                        this.loadSongsByAlbumId($element.data('id'));
+                    });
+
+                    Utils.onClick('.songsByGenrePage__info', event => {
+                        this.loadAlbumInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.songsByGenrePage__enqueue', event => {
+                        Loader.loader();
+                        Api.addPlaylistByAlbumId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.songsByGenrePage__play', event => {
+                        Loader.loader();
+                        Api.playByAlbumId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
+                });
+            }
+        });
+    }
+
+    loadSongsByAlbumId(id) {
+        Loader.loader();
+        Api.getSongsByAlbumId(id).then(result => {
+            Loader.remove();
+            if (result.result && result.result.songs.length) {
+                const songs = result.result.songs;
+                songs.forEach(song => {
+                    const element = `
+                        <div class="songsByAlbumId rowItem">
+                            <a href="#" class="rowItem__link" data-id="${song.songid}">
+                                <i class="fa-solid fa-file rowItem__icon"></i>
+                                <span class="rowItem__span">
+                                    ${song.artist.join(', ')} ${song.label}
+                                </span>
+                            </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn songsByAlbumId__info" data-id="${song.songid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn songsByAlbumId__enqueue" data-id="${song.songid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    $('.page7 .content').append(element);
+
+                    Utils.onClick('.songsByAlbumId a', event => {
+                        Loader.loader();
+                        Api.playBySongId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.songsByAlbumId__info', event => {
+                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.songsByAlbumId__enqueue', event => {
+                        Loader.loader();
+                        Api.addPlaylistBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -324,7 +664,7 @@ class MusicPage {
 
     loadAlbumsYearsPage(text) {
         Loader.loader();
-        Api.getAlbumsByYearsPage(text).then((result) => {
+        Api.getAlbumsByYearValue(text).then((result) => {
             Loader.remove();
             if (result.result && result.result.albums.length) {
                 const albums = result.result.albums;
@@ -352,7 +692,7 @@ class MusicPage {
 
                     Utils.onClick('.albumYearPage a', (event) => {
                         Loader.loader();
-                        Api.playerOpenAlbum($(event.currentTarget).data('id')).then(result => {
+                        Api.playByAlbumId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -377,7 +717,7 @@ class MusicPage {
 
                     Utils.onClick('.page5 .buttonAlbumYearPageEnqueue', (event) => {
                         Loader.loader();
-                        Api.addAlbumTitleEnqueue($(event.currentTarget).data('id')).then((result) => {
+                        Api.addPlaylistByAlbumId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -388,7 +728,7 @@ class MusicPage {
 
     loadAlbumYearInformation(id) {
         Loader.loader();
-        Api.getAlbumTitleDetails(id).then((result) => {
+        Api.getAlbumDetailsByAlbumId(id).then((result) => {
             Loader.remove();
             const info = result.result.albumdetails;
             const body = `
@@ -436,7 +776,7 @@ class MusicPage {
 
     loadAlbumsYearsPageSongs(id) {
         Loader.loader();
-        Api.getAlbumsYearsPageSongs(id).then(result => {
+        Api.getSongsByAlbumId(id).then(result => {
             Loader.remove();
             if (result.result && result.result.songs.length) {
                 const songs = result.result.songs;
@@ -458,14 +798,14 @@ class MusicPage {
 
                     Utils.onClick('.albumYearPageSong a', (event) => {
                         Loader.loader();
-                        Api.playerOpenAlbumSong($(event.currentTarget).data('id')).then(result => {
+                        Api.playBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
 
                     Utils.onClick('.page6 .btnAddPlaylistYearPageSong', (event) => {
                         Loader.loader();
-                        Api.addSongToPlaylist($(event.currentTarget).data('id')).then(result => {
+                        Api.addPlaylistBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -476,7 +816,7 @@ class MusicPage {
 
     loadAlbumsByGenre() {
         Loader.loader();
-        Api.getAlbumsByGenre().then((result) => {
+        Api.getGenresAudio().then((result) => {
             Loader.remove();
             if (result.result && result.result.genres.length) {
                 const genres = result.result.genres;
@@ -512,7 +852,7 @@ class MusicPage {
 
     loadAlbumsByGenrePage(id, title) {
         Loader.loader();
-        Api.getAlbumsByGenrePage(id).then((result) => {
+        Api.getAlbumsByGenreId(id).then((result) => {
             Loader.remove();
             if (result.result && result.result.albums.length) {
                 const albums = result.result.albums;
@@ -548,7 +888,7 @@ class MusicPage {
 
     loadAlbumsGenreSongsPage(id) {
         Loader.loader();
-        Api.getAlbumsBySongs(id).then(result => {
+        Api.getSongsByAlbumId(id).then(result => {
             Loader.remove();
             if (result.result && result.result.songs.length) {
                 const songs = result.result.songs;
@@ -571,14 +911,14 @@ class MusicPage {
 
                     Utils.onClick('.albumGenreSongsPage a', (event) => {
                         Loader.loader();
-                        Api.playerOpenAlbumSong($(event.currentTarget).data('id')).then((result) => {
+                        Api.playBySongId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
 
                     Utils.onClick('.page6 .btnAlbumGenreSongsPageEnqueue', (event) => {
                         Loader.loader();
-                        Api.addSongToPlaylist($(event.currentTarget).data('id')).then((result) => {
+                        Api.addPlaylistBySongId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -589,7 +929,7 @@ class MusicPage {
 
     loadAlbumsBySongs(id) {
         Loader.loader();
-        Api.getAlbumsBySongs(id).then((result) => {
+        Api.getSongsByAlbumId(id).then((result) => {
             Loader.remove();
             if (result.result && result.result.songs.length) {
                 const songs = result.result.songs;
@@ -608,14 +948,14 @@ class MusicPage {
 
                     Utils.onClick('.albumBySong a', (event) => {
                         Loader.loader();
-                        Api.playerOpenAlbumSong($(event.currentTarget).data('id')).then((result) => {
+                        Api.playBySongId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
 
                     Utils.onClick('.btnEnqueueAlbumSong', (event) => {
                         Loader.loader();
-                        Api.addSongToPlaylist($(event.currentTarget).data('id')).then(result => {
+                        Api.addPlaylistBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -626,7 +966,7 @@ class MusicPage {
 
     loadSongsByArtist() {
         Loader.loader();
-        Api.getSongsByArtist().then(result => {
+        Api.getArtists().then(result => {
             Loader.remove();
             if (result.result && result.result.artists.length) {
                 const artists = result.result.artists;
@@ -665,7 +1005,7 @@ class MusicPage {
 
                     Utils.onClick('.btnEnqueueSongByArtist', (event) => {
                         Loader.loader();
-                        Api.addArtistToPlaylist($(event.currentTarget).data('id')).then(result => {
+                        Api.addPlaylistByArtistId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -676,7 +1016,7 @@ class MusicPage {
 
     loadSongsByArtistItems(id) {
         Loader.loader();
-        Api.getSongsByArtistItems(id).then(result => {
+        Api.getSongsByArtistId(id).then(result => {
             Loader.remove();
             if (result.result && result.result.songs.length) {
                 const songs = result.result.songs;
@@ -695,7 +1035,7 @@ class MusicPage {
 
                     Utils.onClick('.songByArtistItem a', (event) => {
                         Loader.loader();
-                        Api.playerOpenAlbumSong($(event.currentTarget).data('id')).then(result => {
+                        Api.playBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -706,7 +1046,7 @@ class MusicPage {
 
     loadSongsByTitle() {
         Loader.loader();
-        Api.getSongsByTitle().then(result => {
+        Api.getSongs().then(result => {
             Loader.remove();
             if (result.result && result.result.songs.length) {
                 const songs = result.result.songs;
@@ -730,14 +1070,14 @@ class MusicPage {
 
                     Utils.onClick('.page4 .btnEnqueueSongByTitle', (event) => {
                         Loader.loader();
-                        Api.addSongToPlaylist($(event.currentTarget).data('id')).then((result) => {
+                        Api.addPlaylistBySongId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
 
                     Utils.onClick('.songByTitle a', (event) => {
                         Loader.loader();
-                        Api.playerOpenAlbumSong($(event.currentTarget).data('id')).then(result => {
+                        Api.playBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -748,7 +1088,7 @@ class MusicPage {
 
     loadAlbumsByTitle() {
         Loader.loader();
-        Api.getAlbumsByTitle().then((result) => {
+        Api.getAlbums().then((result) => {
             Loader.remove();
             if (result.result && result.result.albums.length) {
                 const albums = result.result.albums;
@@ -776,7 +1116,7 @@ class MusicPage {
 
                     Utils.onClick('.albumByTitle a', (event) => {
                         Loader.loader();
-                        Api.playerOpenAlbum($(event.currentTarget).data('id')).then((result) => {
+                        Api.playByAlbumId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -798,7 +1138,7 @@ class MusicPage {
 
                 Utils.onClick('.btnEnqueueAlbumTitle', (event) => {
                     Loader.loader();
-                    Api.addAlbumTitleEnqueue($(event.currentTarget).data('id')).then(result => {
+                    Api.addPlaylistByAlbumId($(event.currentTarget).data('id')).then(result => {
                         Loader.remove();
                     });
                 });
@@ -812,7 +1152,7 @@ class MusicPage {
 
     loadModalInformationAlbumTitle(id) {
         Loader.loader();
-        Api.getAlbumTitleDetails(id).then((result) => {
+        Api.getAlbumDetailsByAlbumId(id).then((result) => {
             Loader.remove();
             const info = result.result.albumdetails;
             const body = `
@@ -860,7 +1200,7 @@ class MusicPage {
 
     loadSongsAlbumTitle(id) {
         Loader.loader();
-        Api.getAlbumsBySongs(id).then((result) => {
+        Api.getSongsByAlbumId(id).then((result) => {
             Loader.remove();
             if (result.result && result.result.songs.length) {
                 const songs = result.result.songs;
@@ -882,14 +1222,14 @@ class MusicPage {
 
                     Utils.onClick('.page5 .albumTitleSongsPage a', (event) => {
                         Loader.loader();
-                        Api.playerOpenAlbumSong($(event.currentTarget).data('id')).then((result) => {
+                        Api.playBySongId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
 
                     Utils.onClick('.page5 .btnAlbumGenreSongsPageEnqueue', (event) => {
                         Loader.loader();
-                        Api.addSongToPlaylist($(event.currentTarget).data('id')).then(result => {
+                        Api.addPlaylistBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -1020,7 +1360,7 @@ class MusicPage {
 
     loadSongsByYearsItems(year) {
         Loader.loader();
-        Api.getSongsByYearsItems(year).then(result => {
+        Api.getSongsByYearValue(year).then(result => {
             Loader.remove();
             if (result.result && result.result.songs.length) {
                 const songs = result.result.songs;
@@ -1044,14 +1384,14 @@ class MusicPage {
 
                     Utils.onClick('.songByYearItem a', event => {
                         Loader.loader();
-                        Api.playerOpenAlbumSong($(event.currentTarget).data('id')).then(result => {
+                        Api.playBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
 
                     Utils.onClick('.btnEnqueueSongByYearItem', (event) => {
                         Loader.loader();
-                        Api.addSongToPlaylist($(event.currentTarget).data('id')).then(result => {
+                        Api.addPlaylistBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -1062,7 +1402,7 @@ class MusicPage {
 
     loadSongsByGenre() {
         Loader.loader();
-        Api.getSongsByGenre().then(result => {
+        Api.getGenres().then(result => {
             Loader.remove();
             if (result.result && result.result.genres.length) {
                 const genres = result.result.genres;
@@ -1098,7 +1438,7 @@ class MusicPage {
 
                     Utils.onClick('.btnEnqueueSongByGenre', event => {
                         Loader.loader();
-                        Api.addEnqueueGenre($(event.currentTarget).data('id')).then((result) => {
+                        Api.addPlaylistMusicByGenreId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
@@ -1109,7 +1449,7 @@ class MusicPage {
 
     loadSongsByGenreItems(id) {
         Loader.loader();
-        Api.getSongsByGenreItems(id).then(result => {
+        Api.getSongsByGenreId(id).then(result => {
             Loader.remove();
             if (result.result && result.result.songs.length) {
                 const songs = result.result.songs;
@@ -1136,7 +1476,7 @@ class MusicPage {
 
                     Utils.onClick('.songByGenreItem a', (event) => {
                         Loader.loader();
-                        Api.playerOpenAlbumSong($(event.currentTarget).data('id')).then(result => {
+                        Api.playBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -1147,7 +1487,7 @@ class MusicPage {
 
                     Utils.onClick('.btnEnqueueSongByGenreItem', event => {
                         Loader.loader();
-                        Api.addSongToPlaylist($(event.currentTarget).data('id')).then(result => {
+                        Api.addPlaylistBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -1158,7 +1498,7 @@ class MusicPage {
 
     loadSongGenreInformation(id) {
         Loader.loader();
-        Api.getSongGenreInformation(id).then(result => {
+        Api.getSongDetailsBySongId(id).then(result => {
             Loader.remove();
             const info = result.result.songdetails;
             const body = `
@@ -1205,7 +1545,7 @@ class MusicPage {
 
     loadFilesPage() {
         Loader.loader();
-        Api.getFiles("music").then((result) => {
+        Api.getFilesByMedia("music").then((result) => {
             Loader.remove();
             if (result.result && result.result.sources.length) {
                 const files = result.result.sources;
@@ -1242,7 +1582,7 @@ class MusicPage {
         this.breadcrumb.addItem($(`.page${numPageActive}`).find('h2').text(), numPageActive, numPageActive);
 
         Loader.loader();
-        Api.getDirectory(path, "music").then((result) => {
+        Api.getDirectoryByDirectoryAndMedia(path, "music").then((result) => {
             Loader.remove();
             if (result.result && result.result.files.length) {
                 const files = result.result.files;
@@ -1267,7 +1607,7 @@ class MusicPage {
                             this.loadFilesDirectory(file, $element.find('.rowItem__span').text(), numPageActive + 1);
                         } else {
                             Loader.loader();
-                            Api.playerOpenFile(file).then((result) => {
+                            Api.playByFile(file).then((result) => {
                                 Loader.remove();
                             });
                         }

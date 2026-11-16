@@ -3,6 +3,11 @@
     "title": "ZuvoHome",
     "save": "Save",
     "information": "Informations",
+    "tooltip": {
+        "info": "Informations",
+        "enqueue": "Enqueue",
+        "play": "Play"
+    },
     "alert": {
         "added": "Added Successfully",
         "played": "Played Successfully",
@@ -88,6 +93,7 @@
             "lang": "Language"
         },
         "info": {
+            "title": "Informations",
             "genre": "Genres",
             "description": "Description",
             "tags": "Tags",
@@ -97,7 +103,9 @@
             "artists": "Artists",
             "year": "Year",
             "recordLabel": "Record label",
-            "lastPlayed": "Last played"
+            "lastPlayed": "Last played",
+            "yearactive": "Active years",
+            "albumlabel": "Album"
         },
         "movie": {
             "originaltitle": "Original title",

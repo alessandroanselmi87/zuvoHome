@@ -2,20 +2,6 @@
 
 class Api {
 
-    static getTvShows() {
-        const command = {
-            "jsonrpc": "2.0",
-            "method": "VideoLibrary.GetTVShows",
-            "params": {
-                "properties": [
-                    "thumbnail"
-                ]
-            },
-            "id": 1
-        };
-        return Xbmc.send(JSON.stringify(command));
-    }
-
     static getArtists() {
         const command = {
             "jsonrpc": "2.0",
@@ -49,7 +35,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getFiles(type) {
+    static getFilesByMedia(type) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Files.GetSources",
@@ -61,21 +47,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getFilesDetails(path, type) {
-        const command = {
-            "jsonrpc": "2.0",
-            "method": "Files.GetFileDetails",
-            "params": {
-                "file": path,
-                "media": type,
-                "properties": ["resume"]
-            },
-            "id": 1
-        };
-        return Xbmc.send(JSON.stringify(command));
-    }
-
-    static getDirectory(path, type) {
+    static getDirectoryByDirectoryAndMedia(path, type) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Files.GetDirectory",
@@ -90,7 +62,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getGenreArtists() {
+    static getGenresAudio() {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetGenres",
@@ -105,7 +77,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getGenreArtistByValue(id) {
+    static getArtistsByGenreId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetArtists",
@@ -140,7 +112,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getMoviesByTitle() {
+    static getMovies() {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetMovies",
@@ -167,7 +139,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getMoviesByGenre() {
+    static getGenresVideo() {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetGenres",
@@ -182,7 +154,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getMoviesByGenreValue(id) {
+    static getMoviesByGenreId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetMovies",
@@ -232,7 +204,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getMoviesByYearsPage(value) {
+    static getMoviesByYearsValue(value) {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetMovies",
@@ -264,7 +236,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getVideoMusicByTitle() {
+    static getMusicVideos() {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetMusicVideos",
@@ -309,7 +281,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getVideoPlaylistsItems(file) {
+    static getVideoPlaylistsByDirectory(file) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Files.GetDirectory",
@@ -323,7 +295,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getTVShowsByTitle() {
+    static getTVShows() {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetTVShows",
@@ -355,7 +327,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getTvShowsSeasons(id) {
+    static getSeasonsByTvShowId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetSeasons",
@@ -369,7 +341,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getEpisodesList(id, tvshowid) {
+    static getEpisodesByTvShowIdAndSeason(id, tvshowid) {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetEpisodes",
@@ -401,7 +373,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getVideoMusicByGenre() {
+    static getGenresByMusicVideo() {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetGenres",
@@ -416,7 +388,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static addVideoFileToPlaylist(file) {
+    static addVideoByFile(file) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Playlist.Add",
@@ -436,7 +408,7 @@ class Api {
         });
     }
 
-    static getMusicVideoByGenreValueList(id) {
+    static getMusicVideosByGenreId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetMusicVideos",
@@ -468,7 +440,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getVideoMusicByYear() {
+    static getMusicVideoByYear() {
         const command = {
             "jsonrpc": "2.0",
             "method": "Files.GetDirectory",
@@ -486,7 +458,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getMusicVideoByYearValue(label) {
+    static getMusicVideoByYear(label) {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetMusicVideos",
@@ -520,7 +492,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getTVShowsByGenres() {
+    static getGenresByTvShow() {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetGenres",
@@ -535,7 +507,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getTVShowsByGenresValues(id) {
+    static getTvShowsByGenreId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetTVShows",
@@ -570,7 +542,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getSourcesFilesVideo() {
+    static getSourcesVideo() {
         const command = {
             "jsonrpc": "2.0",
             "method": "Files.GetSources",
@@ -580,7 +552,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static playerOpenMusicVideo(id) {
+    static playByMusicVideoId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Player.Open",
@@ -599,26 +571,7 @@ class Api {
         });
     }
 
-    static playerGenre(id) {
-        const command = {
-            "jsonrpc": "2.0",
-            "method": "Player.Open",
-            "params": {
-                "item": {
-                    "genreid": id
-                }
-            },
-            "id": "libPlayerOpen"
-        };
-        return new Promise((resolve, reject) => {
-            Xbmc.send(JSON.stringify(command)).then((result) => {
-                Utils.getNotifications(Translation.get('alert.played', "Played Successfully"));
-                resolve(result);
-            }).catch((error) => reject(error));
-        });
-    }
-
-    static playerOpenFile(path) {
+    static playByFile(path) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Player.Open",
@@ -637,7 +590,7 @@ class Api {
         });
     }
 
-    static playerOpenEpisode(id) {
+    static playByEpisodeId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Player.Open",
@@ -656,7 +609,7 @@ class Api {
         });
     }
 
-    static playerOpenArtist(id) {
+    static playByArtistId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Player.Open",
@@ -675,7 +628,26 @@ class Api {
         });
     }
 
-    static playerOpenMovieTitle(id) {
+    static playByGenreId(id) {
+        const command = {
+            "jsonrpc": "2.0",
+            "method": "Player.Open",
+            "params": {
+                "item": {
+                    "genreid": id
+                }
+            },
+            "id": "libPlayerOpen"
+        };
+        return new Promise((resolve, reject) => {
+            Xbmc.send(JSON.stringify(command)).then((result) => {
+                Utils.getNotifications(Translation.get('alert.played', "Played Successfully"));
+                resolve(result);
+            }).catch((error) => reject(error));
+        });
+    }
+
+    static playByMovieId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Player.Open",
@@ -783,7 +755,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getPlayerProperties(id) {
+    static getProperties(id) {
         const command = {
             "jsonrpc": "2.0",
             "id": "OPProp",
@@ -807,7 +779,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getSeekPlayer(percentage, id) {
+    static getSeekByPlayerIdAndValue(percentage, id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Player.Seek",
@@ -820,7 +792,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getPlayPause(id) {
+    static getPlayPauseByPlayerId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Player.PlayPause",
@@ -832,7 +804,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getStop(id) {
+    static getStopByPlayerId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Player.Stop",
@@ -842,7 +814,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getNextPlayer(id) {
+    static getGoToNextByPlayerId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Player.GoTo",
@@ -855,7 +827,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getPrevPlayer(id) {
+    static getGoToPreviousByPlayerId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Player.GoTo",
@@ -868,7 +840,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getPlayerItems(id) {
+    static getPlaylistItemsByPlaylistId(id) {
         const command = {
             "jsonrpc": "2.0",
             "id": "libNextItem",
@@ -890,7 +862,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getEnqueuePlayer(id) {
+    static addPlaylistByMovieId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Playlist.Add",
@@ -926,7 +898,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getTVShowsByYearsPage(year) {
+    static getTvShowsByYearValue(year) {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetTVShows",
@@ -934,7 +906,7 @@ class Api {
                 "filter": {
                     "field": "year",
                     "operator": "is",
-                    "value": `${year}`
+                    "value": year
                 },
                 "limits": {
                     "start": 0,
@@ -963,20 +935,6 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getTvShowSeasons(id) {
-        const command = {
-            "jsonrpc": "2.0",
-            "method": "VideoLibrary.GetSeasons",
-            "params": {
-                "tvshowid": id,
-                "properties": ["art", "season", "playcount"],
-                "sort": { "method": "label" }
-            },
-            "id": "libSeasons"
-        };
-        return Xbmc.send(JSON.stringify(command));
-    }
-
     static getMusicPlaylist() {
         const command = {
             "jsonrpc": "2.0",
@@ -991,28 +949,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getMusicPlaylistsItems(file) {
-        const command = {
-            "jsonrpc": "2.0",
-            "method": "Files.GetDirectory",
-            "params": {
-                "directory": file,
-                "media": "music",
-                "properties": [
-                    "artist",
-                    "album",
-                    "showtitle",
-                    "episode",
-                    "season",
-                    "title"
-                ]
-            },
-            "id": 1
-        };
-        return Xbmc.send(JSON.stringify(command));
-    }
-
-    static getAlbumsByTitle() {
+    static getAlbums() {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetAlbums",
@@ -1039,7 +976,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static playerOpenAlbum(id) {
+    static playByAlbumId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Player.Open",
@@ -1058,7 +995,7 @@ class Api {
         });
     }
 
-    static getAlbumsBySongs(id) {
+    static getSongsByAlbumId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetSongs",
@@ -1087,7 +1024,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static playerOpenAlbumSong(id) {
+    static playBySongId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Player.Open",
@@ -1104,7 +1041,7 @@ class Api {
         });
     }
 
-    static addSongToPlaylist(id) {
+    static addPlaylistBySongId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Playlist.Add",
@@ -1120,21 +1057,6 @@ class Api {
                 resolve(result);
             }).catch(error => reject(error));
         });
-    }
-
-    static getAlbumsByGenre() {
-        const command = {
-            "jsonrpc": "2.0",
-            "method": "AudioLibrary.GetGenres",
-            "params": {
-                "sort": {
-                    "order": "ascending",
-                    "method": "label"
-                }
-            },
-            "id": 1
-        };
-        return Xbmc.send(JSON.stringify(command));
     }
 
     static getAlbumsByYears() {
@@ -1155,7 +1077,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getAlbumsByYearsPage(year) {
+    static getAlbumsByYearValue(year) {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetAlbums",
@@ -1190,31 +1112,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getAlbumsYearsPageSongs(id) {
-        const command = {
-            "jsonrpc": "2.0",
-            "method": "AudioLibrary.GetSongs",
-            "params": {
-                "filter": { "albumid": id },
-                "limits": { "start": 0, "end": 999999 },
-                "properties": [
-                    "artist",
-                    "duration",
-                    "album",
-                    "track"
-                ],
-                "sort": {
-                    "order": "ascending",
-                    "method": "track",
-                    "ignorearticle": true
-                }
-            },
-            "id": "libSongs"
-        };
-        return Xbmc.send(JSON.stringify(command));
-    }
-
-    static getAlbumsByGenrePage(id) {
+    static getAlbumsByGenreId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetAlbums",
@@ -1247,7 +1145,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static addAlbumTitleEnqueue(id) {
+    static addPlaylistByAlbumId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Playlist.Add",
@@ -1265,7 +1163,7 @@ class Api {
         });
     }
 
-    static getAlbumTitleDetails(id) {
+    static getAlbumDetailsByAlbumId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetAlbumDetails",
@@ -1295,7 +1193,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getSongsByTitle() {
+    static getSongs() {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetSongs",
@@ -1321,36 +1219,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getSongsByArtist() {
-        const command = {
-            "jsonrpc": "2.0",
-            "method": "AudioLibrary.GetArtists",
-            "params": {
-                "limits": { "start": 0, "end": 99999 },
-                "properties": [
-                    "thumbnail",
-                    "fanart",
-                    "born",
-                    "formed",
-                    "died",
-                    "disbanded",
-                    "yearsactive",
-                    "mood",
-                    "style",
-                    "genre"
-                ],
-                "sort": {
-                    "order": "ascending",
-                    "method": "artist",
-                    "ignorearticle": true
-                }
-            },
-            "id": 1
-        };
-        return Xbmc.send(JSON.stringify(command));
-    }
-
-    static getSongsByArtistItems(id) {
+    static getSongsByArtistId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetSongs",
@@ -1374,7 +1243,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static addArtistToPlaylist(id) {
+    static addPlaylistByArtistId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Playlist.Add",
@@ -1392,7 +1261,7 @@ class Api {
         });
     }
 
-    static getSongsByGenre() {
+    static getGenres() {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetGenres",
@@ -1407,7 +1276,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getSongsByGenreItems(id) {
+    static getSongsByGenreId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetSongs",
@@ -1422,7 +1291,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getSongGenreInformation(id) {
+    static getSongDetailsBySongId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetSongDetails",
@@ -1458,7 +1327,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static addEnqueueGenre(id) {
+    static addPlaylistMusicByGenreId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Playlist.Add",
@@ -1473,7 +1342,7 @@ class Api {
         });
     }
 
-    static addEnqueueGenreVideo(id) {
+    static addPlaylistVideoByGenreId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Playlist.Add",
@@ -1503,7 +1372,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getSongsByYearsItems(year) {
+    static getSongsByYearValue(year) {
         const command = {
             "jsonrpc": "2.0",
             "method": "AudioLibrary.GetSongs",
@@ -1531,7 +1400,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getTVShowDetails(id) {
+    static getTvShowDetailsByTvShowId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetTVShowDetails",
@@ -1571,7 +1440,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getVolume() {
+    static getVolumeAndMuted() {
         const command = {
             "jsonrpc": "2.0",
             "method": "Application.GetProperties",
@@ -1595,7 +1464,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getSettingsSections() {
+    static getSectionsByExpert() {
         const command = {
             "jsonrpc": "2.0",
             "method": "Settings.GetSections",
@@ -1607,7 +1476,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getSettingsCategories(section) {
+    static getCategoriesBySection(section) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Settings.GetCategories",
@@ -1620,7 +1489,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getSettings(section, category) {
+    static getSettingsBySectionAndCategory(section, category) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Settings.GetSettings",
@@ -1636,7 +1505,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static setSettingValue(id, value) {
+    static setSettingValueBySettingAndValue(id, value) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Settings.SetSettingValue",
@@ -1654,7 +1523,7 @@ class Api {
         });
     }
 
-    static getAddons(type) {
+    static getAddonsByType(type) {
         const command = {
             "jsonrpc": "2.0",
             "method": "Addons.GetAddons",
@@ -1669,7 +1538,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getMovieDetails(id) {
+    static getMovieDetailsByMovieId(id) {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetMovieDetails",
@@ -1706,6 +1575,62 @@ class Api {
                 ]
             },
             "id": 2
+        };
+        return Xbmc.send(JSON.stringify(command));
+    }
+
+    static getArtistDetailsByArtistId(id) {
+        const command = {
+            "jsonrpc": "2.0",
+            "method": "AudioLibrary.GetArtistDetails",
+            "params": {
+                "artistid": id,
+                "properties": [
+                    "thumbnail",
+                    "fanart",
+                    "born",
+                    "formed",
+                    "died",
+                    "disbanded",
+                    "yearsactive",
+                    "mood",
+                    "style",
+                    "genre",
+                    "description",
+                    "instrument"
+                ]
+            },
+            "id": 1
+        };
+        return Xbmc.send(JSON.stringify(command));
+    }
+
+    static getAlbumsByArtistId(id) {
+        const command = {
+            "jsonrpc": "2.0",
+            "method": "AudioLibrary.GetAlbums",
+            "params": {
+                "filter": {
+                    "artistid": id
+                },
+                "limits": { "start": 0, "end": 99999 },
+                "properties": [
+                    "playcount",
+                    "artist",
+                    "genre",
+                    "rating",
+                    "thumbnail",
+                    "year",
+                    "mood",
+                    "style"
+                ],
+                "sort": {
+                    "order": "ascending",
+                    "method": "album",
+                    "ignorearticle": true
+                }
+            },
+            "id": "libAlbums"
         };
         return Xbmc.send(JSON.stringify(command));
     }
