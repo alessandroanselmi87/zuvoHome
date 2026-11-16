@@ -1237,7 +1237,7 @@ class VideoPage {
 
     loadMusicVideoByYearValue(label) {
         Loader.loader();
-        Api.getMusicVideoByYear(label).then((result) => {
+        Api.getMusicVideoByYearValue(label).then((result) => {
             Loader.remove();
             if (result.result && result.result.musicvideos.length) {
                 const items = result.result.musicvideos;

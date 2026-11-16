@@ -458,7 +458,7 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static getMusicVideoByYear(label) {
+    static getMusicVideoByYearValue(label) {
         const command = {
             "jsonrpc": "2.0",
             "method": "VideoLibrary.GetMusicVideos",
