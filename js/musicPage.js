@@ -788,8 +788,11 @@ class MusicPage {
                                 <span class="rowItem__span">${song.artist.join(' ')} ${song.label}</span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="btnAddPlaylistYearPageSong rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}">
-                                    <i class="fa-solid fa-file-circle-plus"></i>
+                                <button class="btnAddPlaylistYearPageSong rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="btnAddPlaylistYearPageSongInfo rowItem__btn-group__btn2 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
                                 </button>
                             </div>
                         </div>
@@ -809,6 +812,10 @@ class MusicPage {
                             Loader.remove();
                         });
                     });
+
+                    Utils.onClick('.btnAddPlaylistYearPageSongInfo', event => {
+                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
+                    });
                 });
             }
         });
@@ -827,6 +834,14 @@ class MusicPage {
                                 <i class="fa-solid fa-folder-open rowItem__icon"></i>
                                 <span class="rowItem__span">${genre.label}</span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="albumGenre__enqueue rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${genre.genreid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="albumGenre__play rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${genre.genreid}" title="${Translation.get('tooltip.play', 'Play')}">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $(`.page4 .content`).append(element);
@@ -844,6 +859,20 @@ class MusicPage {
 
                         this.breadcrumb.addItem(Translation.get('gui.music.albums.genres', 'Genres'), 4, 4);
                         this.loadAlbumsByGenrePage($element.data('id'), $element.text());
+                    });
+
+                    Utils.onClick('.albumGenre__enqueue', event => {
+                        Loader.loader();
+                        Api.addPlaylistMusicByGenreId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.albumGenre__play', (event) => {
+                        Loader.loader();
+                        Api.playByGenreId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
                     });
                 });
             }
@@ -863,6 +892,17 @@ class MusicPage {
                                 <i class="fa-solid fa-folder-open rowItem__icon"></i>
                                 <span class="rowItem__span">${album.artist.join(' ')} ${album.label}</span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="albumGenrePage__enqueue rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${album.albumid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="albumGenrePage__play rowItem__btn-group__btn2 rowItem__btn-group__btn" data-id="${album.albumid}" title="${Translation.get('tooltip.play', 'Play')}">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                                <button class="albumGenrePage__info rowItem__btn-group__btn3 rowItem__btn-group__btn" data-id="${album.albumid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $('.page5 .content').append(element);
@@ -880,6 +920,24 @@ class MusicPage {
 
                         this.breadcrumb.addItem(title, 5, 5);
                         this.loadAlbumsGenreSongsPage($element.data('id'));
+                    });
+
+                    Utils.onClick('.albumGenrePage__enqueue', event => {
+                        Loader.loader();
+                        Api.addPlaylistByAlbumId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.albumGenrePage__play', event => {
+                        Loader.loader();
+                        Api.playByAlbumId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.albumGenrePage__info', event => {
+                        this.loadAlbumInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -900,8 +958,11 @@ class MusicPage {
                                 <span class="rowItem__span">${song.artist.join(' ')} ${song.label}</span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="btnAlbumGenreSongsPageEnqueue rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}">
-                                    <i class="fa-solid fa-file-circle-plus"></i>
+                                <button class="btnAlbumGenreSongsPageEnqueue rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="btnAlbumGenreSongsPageInfo rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
                                 </button>
                             </div>
                         </div>
@@ -921,6 +982,10 @@ class MusicPage {
                         Api.addPlaylistBySongId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
+                    });
+
+                    Utils.onClick('.btnAlbumGenreSongsPageInfo', event => {
+                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -980,8 +1045,11 @@ class MusicPage {
                                 </span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="btnEnqueueSongByArtist rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${artist.artistid}">
+                                <button class="btnEnqueueSongByArtist rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${artist.artistid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="btnInfoSongByArtist rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${artist.artistid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
                                 </button>
                             </div>
                         </div>
@@ -1008,6 +1076,10 @@ class MusicPage {
                         Api.addPlaylistByArtistId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
+                    });
+
+                    Utils.onClick('.btnInfoSongByArtist', event => {
+                        this.loadArtistInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -1060,8 +1132,11 @@ class MusicPage {
                                 </span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="btnEnqueueSongByTitle rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}">
+                                <button class="btnEnqueueSongByTitle rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="btnInfoSongByTitle rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
                                 </button>
                             </div>
                         </div>
@@ -1080,6 +1155,10 @@ class MusicPage {
                         Api.playBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
+                    });
+
+                    Utils.onClick('.btnInfoSongByTitle', event => {
+                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -1211,8 +1290,11 @@ class MusicPage {
                                 <span class="rowItem__span">${song.artist.join(' ')} ${song.label}</span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="btnAlbumGenreSongsPageEnqueue rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}">
-                                    <i class="fa-solid fa-file-circle-plus"></i>
+                                <button class="btnAlbumGenreSongsPageEnqueue rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="btnAlbumGenreSongsPageInfo rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
                                 </button>
                             </div>
                         </div>
@@ -1232,6 +1314,10 @@ class MusicPage {
                         Api.addPlaylistBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
+                    });
+
+                    Utils.onClick('.btnAlbumGenreSongsPageInfo', event => {
+                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
