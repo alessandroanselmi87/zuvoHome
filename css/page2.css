@@ -818,7 +818,7 @@ a:focus-visible {
 
 #volume-controls .ui-slider-handle {
     position: absolute;
-    top: 20%;
+    top: -25%;
 
     background: var(--text-primary);
     border: 2px solid var(--color-interactive);
@@ -2256,7 +2256,7 @@ a:focus-visible {
     margin: 12px 0;
 
     background: var(--bg-hover);
-    border: 0;
+    border: 0 !important;
     border-radius: 10px;
 
     cursor: pointer;
@@ -2284,7 +2284,7 @@ a:focus-visible {
     transform: translate(0%, -25%);
     outline: none;
 
-    cursor: grab;
+    cursor: pointer;
     transition: box-shadow .2s ease;
 }
 
