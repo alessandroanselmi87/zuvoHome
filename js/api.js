@@ -906,7 +906,7 @@ class Api {
                 "filter": {
                     "field": "year",
                     "operator": "is",
-                    "value": year
+                    "value": `${year}`
                 },
                 "limits": {
                     "start": 0,
