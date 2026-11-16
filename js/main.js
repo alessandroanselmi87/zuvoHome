@@ -12,5 +12,6 @@ class Application {
     init() {
         $("body").append(`<div id="application"></div>`);
         const gui = new GUI();
+        new StartPage();
     }
 }

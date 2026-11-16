@@ -91,7 +91,8 @@
             "title": "Settings",
             "theme": "Theme",
             "lang": "Language",
-            "error": "No addons available for this results."
+            "error": "No addons available for this results.",
+            "startPage": "Start page"
         },
         "info": {
             "title": "Informations",

@@ -503,7 +503,7 @@ class VideoPage {
                                 <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieGenrePage__info" data-id="${movie.movieid}">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </button>
-                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieGenrePage__enqueue" data-id="${movie.movieid}">
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn movieGenrePage__enqueue" data-id="${movie.movieid}">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
                             </div>
@@ -742,7 +742,7 @@ class VideoPage {
             movie.cast.forEach((c, i) => {
                 body += `
                             <div class="actorimg actOrder${i}">
-                                <img src="${c.thumbnail ? Utils.kodiImageToUrl(c.thumbnail) : "images/emptyActor.png"}" class="actor" />
+                                <img src="${c.thumbnail ? Utils.kodiImageToUrl(c.thumbnail) : "assets/images/emptyActor.png"}" class="actor" />
                                 <div class="actortext">
                                     <span class="actorname">${c.name}</span>
                                     <span class="actorrole">${c.role}</span>

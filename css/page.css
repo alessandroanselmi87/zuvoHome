@@ -349,17 +349,17 @@ button {
 
 /* Pulsante musica */
 .rowItem .rowItem__btn-group__btn1 {
-    color: #628F91;
+    color: #628F91 !important;
 }
 
 /* Pulsante aggiungi alla coda */
 .rowItem .rowItem__btn-group__btn2 {
-    color: #E8AD55;
+    color: #E8AD55 !important;
 }
 
 /* Pulsante informazioni */
 .rowItem .rowItem__btn-group__btn3 {
-    color: #F05B61;
+    color: #F05B61 !important;
 }
 
 /* ========================================

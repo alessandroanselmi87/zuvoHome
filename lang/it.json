@@ -91,7 +91,8 @@
             "title": "Impostazioni",
             "theme": "Tema",
             "lang": "Lingua",
-            "error": "Non risulta alcun addon disponibile."
+            "error": "Non risulta alcun addon disponibile.",
+            "startPage": "Pagina iniziale"
         },
         "info": {
             "title": "Informazioni",

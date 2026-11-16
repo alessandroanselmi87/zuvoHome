@@ -50,6 +50,10 @@ class SettingsPage {
                 data.themes.forEach(option => {
                     optionsTheme += `<option value="${option.value}"${Theme.get() === option.value ? " selected" : ""}>${option.label}</option>`;
                 });
+                let optionsPages = '';
+                data.pages.forEach(page => {
+                    optionsPages += `<option value="${page.value}"${StartPage.get() === page.value ? " selected" : ""}>${page.label}</option>`;
+                });
                 let language = `
                     <div class="settings">
                         <div class="settingItem">
@@ -65,6 +69,14 @@ class SettingsPage {
                             <div class="settingItem__group">
                                 <select name="theme">
                                     ${optionsTheme}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="settingItem">
+                            <label>${Translation.get('gui.settings.startPage', 'Initial page')}</label>
+                            <div class="settingItem__group">
+                                <select name="startPage">
+                                    ${optionsPages}
                                 </select>
                             </div>
                         </div>
@@ -90,6 +102,12 @@ class SettingsPage {
                     let theme = $('select[name="theme"]').val();
                     Theme.set(theme);
                     $("head #themeCss").attr("href", `css/${theme}.css`);
+
+                    // Gestione pagina iniziale
+                    let startPage = $('select[name="startPage"]').val();
+                    StartPage.set(startPage);
+
+                    Utils.getNotifications(Translation.get('alert.saved', "Saved Successfully"));
                 });
                 resolve();
             });
