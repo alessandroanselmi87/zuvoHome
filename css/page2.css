@@ -818,12 +818,12 @@ a:focus-visible {
 
 #volume-controls .ui-slider-handle {
     position: absolute;
-    top: 50%;
+    top: 20%;
 
     background: var(--text-primary);
     border: 2px solid var(--color-interactive);
     border-radius: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(0%, -25%);
 
     outline: none;
     transition: box-shadow .2s ease;
@@ -2272,16 +2272,16 @@ a:focus-visible {
 
 .page2 .formItem__slider .ui-slider-handle {
     position: absolute;
-    top: 50%;
+    top: -50%;
 
-    width: 17px;
-    height: 17px;
+    width: 19px;
+    height: 19px;
 
     background: var(--text-primary);
     border: 3px solid var(--color-music);
     border-radius: 50%;
 
-    transform: translate(-50%, -50%);
+    transform: translate(0%, -25%);
     outline: none;
 
     cursor: grab;

@@ -571,15 +571,15 @@ button {
 
 #volume-controls,
 .sliderPlayed {
-    position: relative;
+    position: relative !important;
 
-    height: 5px;
+    height: 5px !important;
 
-    background: #514B59;
-    border: none;
-    border-radius: 10px;
+    background: #514B59 !important;
+    border: none !important;
+    border-radius: 10px !important;
 
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 #volume-controls {
@@ -601,7 +601,7 @@ button {
     border: 2px solid var(--accent) !important;
     border-radius: 50% !important;
 
-    transform: translate(-50%, -50%) !important;
+    transform: translate(0%, -50%) !important;
 
     cursor: pointer !important;
 }
@@ -2527,7 +2527,7 @@ button:focus-visible,
     margin: 14px 0 10px;
 
     background: var(--surface-light);
-    border: none;
+    border: none !important;
     border-radius: 10px;
 
     cursor: pointer;
@@ -2548,7 +2548,7 @@ button:focus-visible,
 /* Slider handle */
 .page2 .formItem__slider .ui-slider-handle {
     position: absolute;
-    top: 50%;
+    top: -50%;
 
     width: 19px;
     height: 19px;
@@ -2559,9 +2559,9 @@ button:focus-visible,
     border: 3px solid var(--accent);
     border-radius: 50%;
 
-    transform: translate(-50%, -50%);
+    transform: translate(0%, -25%);
 
-    cursor: grab;
+    cursor: pointer;
     outline: none;
 
     box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
