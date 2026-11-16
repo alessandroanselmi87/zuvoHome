@@ -90,7 +90,8 @@
         "settings": {
             "title": "Impostazioni",
             "theme": "Tema",
-            "lang": "Lingua"
+            "lang": "Lingua",
+            "error": "Non risulta alcun addon disponibile."
         },
         "info": {
             "title": "Informazioni",

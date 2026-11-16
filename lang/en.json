@@ -90,7 +90,8 @@
         "settings": {
             "title": "Settings",
             "theme": "Theme",
-            "lang": "Language"
+            "lang": "Language",
+            "error": "No addons available for this results."
         },
         "info": {
             "title": "Informations",

@@ -195,7 +195,7 @@ class SettingsPage {
     }
 
     loadSection(sectionId) {
-        Loadre.loader();
+        Loader.loader();
         Api.getCategoriesBySection(sectionId).then(categories => {
             const categoryId = categories.result.categories[0].id;
             Api.getSettingsBySectionAndCategory(sectionId, categoryId).then(settings => {
@@ -333,55 +333,64 @@ class SettingsPage {
             Loader.loader();
             Api.getAddonsByType(type).then(result => {
                 Loader.remove();
-                let body = `
-                    <div>
-                        <div>Available Addons</div>
-                        <div class="addonsList">
-                `;
-
-                result.result.addons.forEach(addon => {
-                    body += `
-                            <div class="addonsList__content">
-                                <div class="switchTo">
-                                    <a href="#" id="${this.getId(addon.addonid)}" data-value="${addon.addonid}" class="switchTo__btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
-                                        <span class="ui-button-text">Select</span>
-                                    </a>
-                                </div>
-                                <img src="${Utils.kodiImageToUrl(addon.thumbnail)}">
-                                <div class="movieinfo">
-                                    <span class="label">Name:</span>
-                                    <span class="value">${addon.name}</span>
-                                </div>
-                                <div class="movieinfo">
-                                    <span class="label">Author:</span>
-                                    <span class="value">${addon.author}</span>
-                                </div>
-                                <div class="movieinfo">
-                                    <span class="label">Version:</span>
-                                    <span class="value">${addon.version}</span>
-                                </div>
-                            </div>
+                if (result.result && result.result.addons && result.result.addons.length) {
+                    let body = `
+                        <div>
+                            <div>Available Addons</div>
+                            <div class="addonsList">
                     `;
-                });
 
-                body += `
+                    result.result.addons.forEach(addon => {
+                        body += `
+                                <div class="addonsList__content">
+                                    <div class="switchTo">
+                                        <a href="#" id="${this.getId(addon.addonid)}" data-value="${addon.addonid}" class="switchTo__btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false">
+                                            <span class="ui-button-text">Select</span>
+                                        </a>
+                                    </div>
+                                    <img src="${Utils.kodiImageToUrl(addon.thumbnail)}">
+                                    <div class="movieinfo">
+                                        <span class="label">Name:</span>
+                                        <span class="value">${addon.name}</span>
+                                    </div>
+                                    <div class="movieinfo">
+                                        <span class="label">Author:</span>
+                                        <span class="value">${addon.author}</span>
+                                    </div>
+                                    <div class="movieinfo">
+                                        <span class="label">Version:</span>
+                                        <span class="value">${addon.version}</span>
+                                    </div>
+                                </div>
+                        `;
+                    });
+
+                    body += `
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
 
-                new Modal({
-                    id: 'modalAddonItem',
-                    title: 'Addons',
-                    body,
-                });
+                    new Modal({
+                        id: 'modalAddonItem',
+                        title: 'Addons',
+                        body,
+                    });
 
-                Utils.onClick('.switchTo__btn', (event) => {
-                    const value = $(event.currentTarget).data('value');
-                    this.$btn.val(value);
-                    this.$btn = undefined;
-                    $('#modalAddonItem').modal("hide");
-                    $('#modalAddonItem').remove();
-                });
+                    Utils.onClick('.switchTo__btn', (event) => {
+                        const value = $(event.currentTarget).data('value');
+                        this.$btn.val(value);
+                        this.$btn = undefined;
+                        $('#modalAddonItem').modal("hide");
+                        $('#modalAddonItem').remove();
+                    });
+                } else {
+                    let body = `${Translation.get('gui.settings.error')}`;
+                    new Modal({
+                        id: 'modalAddonItem',
+                        title: 'Addons',
+                        body,
+                    });
+                }
             });
         });
 
