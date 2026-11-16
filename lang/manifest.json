@@ -43,7 +43,7 @@
             "value": "videoMenuItem|moviesLink|moviesTitles"
         },
         {
-            "label": "Video Movies Titles",
+            "label": "Video Movies Genres",
             "value": "videoMenuItem|moviesLink|moviesGenres"
         },
         {
