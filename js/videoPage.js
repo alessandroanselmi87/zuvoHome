@@ -834,7 +834,7 @@ class VideoPage {
             info.cast.forEach((c, i) => {
                 body += `
                     <div class="actorimg actOrder${i}">
-                        <img src="${Utils.kodiImageToUrl(c.thumbnail)}" class="actor">
+                        <img src="${c.thumbnail ? Utils.kodiImageToUrl(c.thumbnail) : 'assets/images/emptyActor.png'}" class="actor">
                         <div class="actortext">
                             <span class="actorname">${c.name}</span>
                             <span class="actorrole">${c.role}</span>
