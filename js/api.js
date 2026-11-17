@@ -388,26 +388,6 @@ class Api {
         return Xbmc.send(JSON.stringify(command));
     }
 
-    static addVideoByFile(file) {
-        const command = {
-            "jsonrpc": "2.0",
-            "method": "Playlist.Add",
-            "params": {
-                "item": {
-                    "file": file
-                },
-                "playlistid": 1
-            },
-            "id": 1
-        };
-        return new Promise((resolve, reject) => {
-            Xbmc.send(JSON.stringify(command)).then((result) => {
-                Utils.getNotifications(Translation.get('alert.added', "Added Successfully"));
-                resolve(result);
-            }).catch((error) => reject(error));
-        });
-    }
-
     static getMusicVideosByGenreId(id) {
         const command = {
             "jsonrpc": "2.0",
@@ -1631,6 +1611,100 @@ class Api {
                 }
             },
             "id": "libAlbums"
+        };
+        return Xbmc.send(JSON.stringify(command));
+    }
+
+    static getEpisodeDetailsByEpisodeId(id) {
+        const command = {
+            "jsonrpc": "2.0",
+            "method": "VideoLibrary.GetEpisodeDetails",
+            "params": {
+                "episodeid": id,
+                "properties": [
+                    "art",
+                    "season",
+                    "episode",
+                    "firstaired",
+                    "plot",
+                    "title",
+                    "runtime",
+                    "rating",
+                    "thumbnail",
+                    "playcount",
+                    "file",
+                    "fanart",
+                    "streamdetails",
+                    "resume"
+                ]
+            },
+            "id": 2
+        };
+        return Xbmc.send(JSON.stringify(command));
+    }
+
+    static addPlaylistByEpisodeId(id) {
+        const command = {
+            "jsonrpc": "2.0",
+            "method": "Playlist.Add",
+            "params": {
+                "item": {
+                    "episodeid": id
+                },
+                "playlistid": 1
+            },
+            "id": "libPlaylistAdd"
+        };
+        return new Promise((resolve, reject) => {
+            Xbmc.send(JSON.stringify(command)).then(result => {
+                Utils.getNotifications(Translation.get('alert.added', 'Added Successfully'));
+                resolve(result);
+            }).catch(error => reject(error));
+        });
+    }
+
+    static addPlaylistByMusicVideoId(id) {
+        const command = {
+            "jsonrpc": "2.0",
+            "method": "Playlist.Add",
+            "params": {
+                "item": {
+                    "musicvideoid": id
+                },
+                "playlistid": 1
+            },
+            "id": "libPlaylistAdd"
+        };
+        return new Promise((resolve, reject) => {
+            Xbmc.send(JSON.stringify(command)).then(result => {
+                Utils.getNotifications(Translation.get('alert.added', 'Added Successfully'));
+                resolve(result);
+            }).catch(error => reject(error));
+        });
+    }
+
+    static getMusicVideoDetailsByMusicVideoId(id) {
+        const command = {
+            "jsonrpc": "2.0",
+            "method": "VideoLibrary.GetMusicVideoDetails",
+            "params": {
+                "musicvideoid": id,
+                "properties": [
+                    "genre",
+                    "director",
+                    "plot",
+                    "title",
+                    "runtime",
+                    "year",
+                    "thumbnail",
+                    "playcount",
+                    "file",
+                    "lastplayed",
+                    "streamdetails",
+                    "fanart"
+                ]
+            },
+            "id": 2
         };
         return Xbmc.send(JSON.stringify(command));
     }

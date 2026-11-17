@@ -6223,3 +6223,988 @@ button:focus-visible,
         transition: none !important;
     }
 }
+
+
+/* ========================================
+   ZUVOHOME - MODAL EPISODE INFORMATION
+======================================== */
+
+/* ========================================
+   OVERLAY
+======================================== */
+
+#modalInformationEpisode {
+    background: rgba(8, 8, 15, 0.78);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    padding: 20px;
+}
+
+/* ========================================
+   DIALOG
+======================================== */
+
+#modalInformationEpisode .modal-dialog {
+    max-width: 900px;
+    width: 100%;
+}
+
+/* ========================================
+   MODAL CONTENT
+======================================== */
+
+#modalInformationEpisode .modal-content {
+    overflow: hidden;
+
+    background: #211D2B;
+    color: #EDE7DD;
+
+    border: 1px solid #393342;
+    border-radius: 16px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.55),
+        0 0 25px rgba(128, 48, 71, 0.12);
+
+    animation: episodeModalIn 0.3s ease;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+#modalInformationEpisode .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    padding: 20px 25px;
+
+    background: #191622;
+    border-bottom: 1px solid #393342;
+}
+
+#modalInformationEpisode .modal-title {
+    margin: 0;
+
+    color: #EDE7DD;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Close button */
+
+#modalInformationEpisode .modal-header .close {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 34px;
+    height: 34px;
+    padding: 0;
+
+    color: #777582;
+    background: #393342;
+
+    border: none;
+    border-radius: 8px;
+
+    opacity: 1;
+    text-shadow: none;
+
+    font-size: 23px;
+    font-weight: 300;
+    line-height: 1;
+
+    transition: all 0.2s ease;
+}
+
+#modalInformationEpisode .modal-header .close__text {
+    position: absolute;
+    top: 2px;
+}
+
+#modalInformationEpisode .modal-header .close:hover {
+    color: #FFFFFF;
+    background: #803047;
+}
+
+/* ========================================
+   BODY
+======================================== */
+
+#modalInformationEpisode .modal-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 28px;
+
+    max-height: 75vh;
+    overflow-y: auto;
+
+    padding: 28px 30px;
+}
+
+/* Custom scrollbar */
+
+#modalInformationEpisode .modal-body::-webkit-scrollbar {
+    width: 7px;
+}
+
+#modalInformationEpisode .modal-body::-webkit-scrollbar-track {
+    background: #191622;
+    border-radius: 10px;
+}
+
+#modalInformationEpisode .modal-body::-webkit-scrollbar-thumb {
+    background: #51495D;
+    border-radius: 10px;
+}
+
+#modalInformationEpisode .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #803047;
+}
+
+/* ========================================
+   EPISODE FANART
+======================================== */
+
+#modalInformationEpisode .thumb {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    background: #191622;
+    border: 1px solid #393342;
+    border-radius: 12px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+#modalInformationEpisode .thumb::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(180deg,
+            transparent 65%,
+            rgba(0, 0, 0, 0.3));
+
+    pointer-events: none;
+}
+
+#modalInformationEpisode .thumbFanart {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.35s ease;
+}
+
+#modalInformationEpisode .thumb:hover .thumbFanart {
+    transform: scale(1.04);
+}
+
+/* ========================================
+   INFORMATION CONTAINER
+======================================== */
+
+#modalInformationEpisode .textinfo {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+/* ========================================
+   EPISODE TITLE
+======================================== */
+
+#modalInformationEpisode .textinfo .title {
+    margin-bottom: 15px;
+}
+
+#modalInformationEpisode .textinfo h1 {
+    position: relative;
+
+    margin: 0 0 10px;
+    padding-bottom: 16px;
+
+    color: #E8AD55;
+    font-size: 1.65rem;
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: 0.3px;
+
+    overflow-wrap: anywhere;
+}
+
+/* Decorative underline */
+
+#modalInformationEpisode .textinfo h1.underline::after {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 65px;
+    height: 3px;
+
+    background: #F05B61;
+    border-radius: 10px;
+}
+
+/* ========================================
+   INFORMATION ROWS
+======================================== */
+
+#modalInformationEpisode .movieinfo {
+    display: grid;
+    grid-template-columns: minmax(110px, 38%) minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+
+    min-width: 0;
+
+    padding: 12px 10px;
+
+    border-bottom: 1px solid rgba(57, 51, 66, 0.7);
+
+    transition: background 0.2s ease;
+}
+
+#modalInformationEpisode .movieinfo:hover {
+    background: rgba(255, 255, 255, 0.025);
+}
+
+/* Labels */
+
+#modalInformationEpisode .movieinfo .label {
+    color: #777582;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Values */
+
+#modalInformationEpisode .movieinfo .value {
+    min-width: 0;
+
+    color: #EDE7DD;
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* File path */
+
+#modalInformationEpisode .movieinfo:last-child .value {
+    color: #A7A3AF;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    word-break: break-all;
+}
+
+/* ========================================
+   RATING
+======================================== */
+
+#modalInformationEpisode .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+
+    white-space: nowrap;
+}
+
+/* Star */
+
+#modalInformationEpisode .rating .star {
+    position: relative;
+
+    display: inline-block;
+
+    color: #51495D;
+    font-size: 21px;
+    line-height: 1;
+
+    white-space: nowrap;
+}
+
+/* Filled star */
+
+#modalInformationEpisode .rating .star-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
+
+    width: 0;
+    height: 100%;
+
+    overflow: hidden;
+
+    color: #E8AD55;
+
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+#modalInformationEpisode .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 16px 25px;
+
+    background: #191622;
+    border-top: 1px solid #393342;
+}
+
+/* Close button */
+
+#modalInformationEpisode .modal-footer .btn-secondary {
+    padding: 9px 24px;
+
+    color: #EDE7DD;
+    background: #393342;
+
+    border: 1px solid #51495D;
+    border-radius: 8px;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    opacity: 1;
+    text-shadow: none;
+
+    transition: all 0.2s ease;
+}
+
+#modalInformationEpisode .modal-footer .btn-secondary:hover {
+    color: #FFFFFF;
+    background: #803047;
+    border-color: #F05B61;
+
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   ANIMATION
+======================================== */
+
+@keyframes episodeModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+======================================== */
+
+@media (max-width: 768px) {
+
+    #modalInformationEpisode .modal-dialog {
+        max-width: 95%;
+    }
+
+    #modalInformationEpisode .modal-body {
+        grid-template-columns: 1fr;
+        gap: 22px;
+
+        padding: 22px;
+    }
+
+    #modalInformationEpisode .thumb {
+        width: 100%;
+        max-height: 300px;
+    }
+
+    #modalInformationEpisode .textinfo h1 {
+        font-size: 1.55rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    #modalInformationEpisode {
+        padding: 10px;
+    }
+
+    #modalInformationEpisode .modal-dialog {
+        margin: 10px auto;
+        max-width: 100%;
+    }
+
+    #modalInformationEpisode .modal-header {
+        padding: 16px 18px;
+    }
+
+    #modalInformationEpisode .modal-body {
+        max-height: 75vh;
+        gap: 18px;
+
+        padding: 20px 15px;
+    }
+
+    #modalInformationEpisode .thumb {
+        max-height: 220px;
+    }
+
+    #modalInformationEpisode .textinfo h1 {
+        font-size: 1.4rem;
+    }
+
+    #modalInformationEpisode .movieinfo {
+        grid-template-columns: 1fr;
+        gap: 5px;
+
+        padding: 11px 10px;
+    }
+
+    #modalInformationEpisode .movieinfo .label {
+        font-size: 0.8rem;
+    }
+
+    #modalInformationEpisode .movieinfo .value {
+        font-size: 0.88rem;
+    }
+
+    #modalInformationEpisode .movieinfo:last-child .value {
+        font-size: 0.75rem;
+    }
+
+    #modalInformationEpisode .rating .star {
+        font-size: 19px;
+    }
+
+    #modalInformationEpisode .modal-footer {
+        padding: 14px 16px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - SMALL MOBILE
+======================================== */
+
+@media (max-width: 380px) {
+
+    #modalInformationEpisode .modal-body {
+        padding: 16px 12px;
+    }
+
+    #modalInformationEpisode .textinfo h1 {
+        font-size: 1.25rem;
+    }
+
+    #modalInformationEpisode .rating .star {
+        font-size: 17px;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+#modalInformationEpisode button:focus-visible {
+    outline: 2px solid #E8AD55;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    #modalInformationEpisode .modal-content,
+    #modalInformationEpisode .thumbFanart,
+    #modalInformationEpisode * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+
+/* =========================================================
+   ZUVOHOME - MODAL MUSIC VIDEO INFORMATION
+   CINEMATIC VIBES DESIGN SYSTEM
+========================================================= */
+
+/* ========================================
+   OVERLAY
+======================================== */
+
+#modalMusicVideoInformation {
+    background: rgba(8, 8, 15, 0.78);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    padding: 20px;
+}
+
+/* ========================================
+   DIALOG
+======================================== */
+
+#modalMusicVideoInformation .modal-dialog {
+    max-width: 900px;
+    width: 100%;
+}
+
+/* ========================================
+   MODAL CONTENT
+======================================== */
+
+#modalMusicVideoInformation .modal-content {
+    overflow: hidden;
+
+    background: #211D2B;
+    color: #EDE7DD;
+
+    border: 1px solid #393342;
+    border-radius: 16px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.55),
+        0 0 25px rgba(128, 48, 71, 0.12);
+
+    animation: musicVideoModalIn 0.3s ease;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+#modalMusicVideoInformation .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 25px;
+
+    background: #191622;
+    border-bottom: 1px solid #393342;
+}
+
+#modalMusicVideoInformation .modal-title {
+    margin: 0;
+
+    color: #EDE7DD;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Close button */
+
+#modalMusicVideoInformation .modal-header .close {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+    padding: 0;
+
+    color: #777582;
+    background: #393342;
+
+    border: none;
+    border-radius: 8px;
+
+    opacity: 1;
+    text-shadow: none;
+
+    font-size: 23px;
+    font-weight: 300;
+    line-height: 1;
+
+    transition: all 0.2s ease;
+}
+
+#modalMusicVideoInformation .modal-header .close__text {
+    position: absolute;
+    top: 2px;
+}
+
+#modalMusicVideoInformation .modal-header .close:hover {
+    color: #FFFFFF;
+    background: #803047;
+}
+
+/* ========================================
+   BODY
+======================================== */
+
+#modalMusicVideoInformation .modal-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 28px;
+
+    max-height: 75vh;
+    overflow-y: auto;
+
+    padding: 28px 30px;
+}
+
+/* Custom scrollbar */
+
+#modalMusicVideoInformation .modal-body::-webkit-scrollbar {
+    width: 7px;
+}
+
+#modalMusicVideoInformation .modal-body::-webkit-scrollbar-track {
+    background: #191622;
+    border-radius: 10px;
+}
+
+#modalMusicVideoInformation .modal-body::-webkit-scrollbar-thumb {
+    background: #393342;
+    border-radius: 10px;
+}
+
+#modalMusicVideoInformation .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #803047;
+}
+
+/* ========================================
+   THUMBNAIL
+======================================== */
+
+#modalMusicVideoInformation .thumb {
+    position: relative;
+    overflow: hidden;
+
+    width: 100%;
+    aspect-ratio: 16 / 9;
+
+    background: #191622;
+    border: 1px solid #393342;
+    border-radius: 12px;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+#modalMusicVideoInformation .thumbFanart {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.4s ease;
+}
+
+#modalMusicVideoInformation .thumb:hover .thumbFanart {
+    transform: scale(1.035);
+}
+
+/* ========================================
+   TEXT INFORMATION
+======================================== */
+
+#modalMusicVideoInformation .textinfo {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+/* Music video title */
+
+#modalMusicVideoInformation .textinfo h1 {
+    position: relative;
+
+    margin: 0 0 24px;
+    padding-bottom: 16px;
+
+    color: #E8AD55;
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+
+    overflow-wrap: anywhere;
+}
+
+/* Decorative underline */
+
+#modalMusicVideoInformation .textinfo h1.underline::after {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 65px;
+    height: 3px;
+
+    background: #F05B61;
+    border-radius: 10px;
+}
+
+/* ========================================
+   INFORMATION ROWS
+======================================== */
+
+#modalMusicVideoInformation .movieinfo {
+    display: grid;
+    grid-template-columns: minmax(120px, 35%) minmax(0, 1fr);
+    align-items: start;
+    gap: 15px;
+
+    padding: 13px 15px;
+
+    border-bottom: 1px solid rgba(57, 51, 66, 0.7);
+
+    transition: background 0.2s ease;
+}
+
+#modalMusicVideoInformation .movieinfo:hover {
+    background: rgba(255, 255, 255, 0.025);
+}
+
+/* Labels */
+
+#modalMusicVideoInformation .movieinfo .label {
+    color: #777582;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+/* Values */
+
+#modalMusicVideoInformation .movieinfo .value {
+    min-width: 0;
+
+    color: #EDE7DD;
+    font-size: 0.92rem;
+    font-weight: 500;
+
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   FILE PATH
+======================================== */
+
+#modalMusicVideoInformation .movieinfo.filelink {
+    grid-template-columns: 1fr;
+    gap: 7px;
+
+    margin-top: 8px;
+    padding: 14px 15px;
+
+    background: rgba(25, 22, 34, 0.65);
+    border: 1px solid #393342;
+    border-radius: 8px;
+}
+
+#modalMusicVideoInformation .movieinfo.filelink .label {
+    color: #E8AD55;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+#modalMusicVideoInformation .movieinfo.filelink .value {
+    color: #A7A3AF;
+    font-size: 0.82rem;
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+#modalMusicVideoInformation .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 16px 25px;
+
+    background: #191622;
+    border-top: 1px solid #393342;
+}
+
+/* Footer close button */
+
+#modalMusicVideoInformation .modal-footer .btn-secondary {
+    padding: 9px 24px;
+
+    color: #EDE7DD;
+    background: #393342;
+
+    border: 1px solid #51495D;
+    border-radius: 8px;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    opacity: 1;
+    text-shadow: none;
+
+    transition: all 0.2s ease;
+}
+
+#modalMusicVideoInformation .modal-footer .btn-secondary:hover {
+    color: #FFFFFF;
+    background: #803047;
+    border-color: #F05B61;
+
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   ANIMATION
+======================================== */
+
+@keyframes musicVideoModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+======================================== */
+
+@media (max-width: 768px) {
+
+    #modalMusicVideoInformation .modal-body {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    #modalMusicVideoInformation .thumb {
+        max-width: 100%;
+    }
+
+    #modalMusicVideoInformation .textinfo h1 {
+        font-size: 1.7rem;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    #modalMusicVideoInformation {
+        padding: 10px;
+    }
+
+    #modalMusicVideoInformation .modal-dialog {
+        margin: 10px auto;
+    }
+
+    #modalMusicVideoInformation .modal-header {
+        padding: 16px 18px;
+    }
+
+    #modalMusicVideoInformation .modal-body {
+        padding: 20px 16px;
+        gap: 18px;
+    }
+
+    #modalMusicVideoInformation .textinfo h1 {
+        margin-bottom: 18px;
+        font-size: 1.55rem;
+    }
+
+    #modalMusicVideoInformation .movieinfo {
+        grid-template-columns: 1fr;
+        gap: 5px;
+
+        padding: 12px 10px;
+    }
+
+    #modalMusicVideoInformation .movieinfo .label {
+        font-size: 0.8rem;
+    }
+
+    #modalMusicVideoInformation .movieinfo .value {
+        font-size: 0.9rem;
+    }
+
+    #modalMusicVideoInformation .movieinfo.filelink {
+        padding: 12px;
+    }
+
+    #modalMusicVideoInformation .modal-footer {
+        padding: 14px 16px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - SMALL MOBILE
+======================================== */
+
+@media (max-width: 380px) {
+
+    #modalMusicVideoInformation .modal-body {
+        padding: 16px 12px;
+    }
+
+    #modalMusicVideoInformation .textinfo h1 {
+        font-size: 1.4rem;
+    }
+
+    #modalMusicVideoInformation .movieinfo {
+        padding: 10px 8px;
+    }
+}
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #modalMusicVideoInformation .modal-content,
+    #modalMusicVideoInformation *,
+    #modalMusicVideoInformation *::before,
+    #modalMusicVideoInformation *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}

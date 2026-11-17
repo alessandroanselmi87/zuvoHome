@@ -676,13 +676,13 @@ class MusicPage {
                                 <span class="rowItem__span">${album.artist.join(' ')} - ${album.label}</span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="buttonAlbumYearPageSongs rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${album.albumid}">
+                                <button class="buttonAlbumYearPageSongs rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${album.albumid}" title="${Translation.get('tooltip.songs', 'Songs')}">
                                     <i class="fa-solid fa-music"></i>
                                 </button>
-                                <button class="buttonAlbumYearPageEnqueue rowItem__btn-group__btn2 rowItem__btn-group__btn" data-id="${album.albumid}">
+                                <button class="buttonAlbumYearPageEnqueue rowItem__btn-group__btn2 rowItem__btn-group__btn" data-id="${album.albumid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
-                                <button class="buttonAlbumYearPageInformation rowItem__btn-group__btn3 rowItem__btn-group__btn" data-id="${album.albumid}">
+                                <button class="buttonAlbumYearPageInformation rowItem__btn-group__btn3 rowItem__btn-group__btn" data-id="${album.albumid}" title="${Translation.get('tooltip.info', 'Info')}">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </button>
                             </div>
@@ -1101,6 +1101,14 @@ class MusicPage {
                                     ${song.artist.join(' ')} ${song.label}
                                 </span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn songByArtistItem__enqueue" data-id="${song.songid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn songByArtistItem__info" data-id="${song.songid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $('.page5 .content').append(element);
@@ -1110,6 +1118,17 @@ class MusicPage {
                         Api.playBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
+                    });
+
+                    Utils.onClick('.songByArtistItem__enqueue', event => {
+                        Loader.loader();
+                        Api.addPlaylistBySongId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.songByArtistItem__info', event => {
+                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -1179,13 +1198,13 @@ class MusicPage {
                                 <span class="rowItem__span">${album.artist.join(' ')} - ${album.label}</span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="btnSongsAlbumTitle rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${album.albumid}">
+                                <button class="btnSongsAlbumTitle rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${album.albumid}" title="${Translation.get('tooltip.songs', 'Songs')}">
                                     <i class="fa-solid fa-music"></i>
                                 </button>
-                                <button class="btnEnqueueAlbumTitle rowItem__btn-group__btn2 rowItem__btn-group__btn" data-id="${album.albumid}">
+                                <button class="btnEnqueueAlbumTitle rowItem__btn-group__btn2 rowItem__btn-group__btn" data-id="${album.albumid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
-                                <button class="btnInformationAlbumTitle rowItem__btn-group__btn3 rowItem__btn-group__btn" data-id="${album.albumid}">
+                                <button class="btnInformationAlbumTitle rowItem__btn-group__btn3 rowItem__btn-group__btn" data-id="${album.albumid}" title="${Translation.get('tooltip.info', 'Info')}">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </button>
                             </div>
@@ -1460,8 +1479,11 @@ class MusicPage {
                                 </span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="btnEnqueueSongByYearItem rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}">
+                                <button class="btnEnqueueSongByYearItem rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="btnInfoSongByYearItem rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
                                 </button>
                             </div>
                         </div>
@@ -1480,6 +1502,10 @@ class MusicPage {
                         Api.addPlaylistBySongId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
+                    });
+
+                    Utils.onClick('.btnInfoSongByYearItem', event => {
+                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -1500,8 +1526,11 @@ class MusicPage {
                                 <span class="rowItem__span">${genre.label}</span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="btnEnqueueSongByGenre rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${genre.genreid}">
+                                <button class="btnEnqueueSongByGenre rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${genre.genreid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="btnPlaySongByGenre rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${genre.genreid}" title="${Translation.get('tooltip.play', 'Play')}">
+                                    <i class="fa-solid fa-play"></i>
                                 </button>
                             </div>
                         </div>
@@ -1528,6 +1557,13 @@ class MusicPage {
                             Loader.remove();
                         });
                     });
+
+                    Utils.onClick('.btnPlaySongByGenre', event => {
+                        Loader.loader();
+                        Api.playByGenreId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
+                    });
                 });
             }
         });
@@ -1549,10 +1585,10 @@ class MusicPage {
                                 </span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="btnEnqueueSongByGenreItem rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}">
+                                <button class="btnEnqueueSongByGenreItem rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
-                                <button class="btnInfoSongByGenreItem rowItem__btn-group__btn2 rowItem__btn-group__btn" data-id="${song.songid}">
+                                <button class="btnInfoSongByGenreItem rowItem__btn-group__btn2 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.info', 'Info')}">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </button>
                             </div>

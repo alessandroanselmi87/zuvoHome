@@ -267,7 +267,7 @@ class VideoPage {
                                 <span class="rowItem__span">${genre.label}</span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieGenre__enqueue" data-id="${genre.genreid}">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieGenre__enqueue" data-id="${genre.genreid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
                             </div>
@@ -313,7 +313,7 @@ class VideoPage {
                                 <span class="rowItem__span">${tvshow.label}</span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="btnTVShowInformation rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${tvshow.tvshowid}">
+                                <button class="btnTVShowInformation rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${tvshow.tvshowid}" title="${Translation.get('tooltip.info', 'Info')}">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </button>
                             </div>
@@ -392,8 +392,11 @@ class VideoPage {
                                 <span class="rowItem__span">${movie.label}</span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieYearPage__info" data-id="${movie.movieid}">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieYearPage__info" data-id="${movie.movieid}" title="${Translation.get('tooltip.info', 'Info')}">
                                     <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn movieYearPage__enqueue" data-id="${movie.movieid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
                                 </button>
                             </div>
                         </div>
@@ -409,6 +412,13 @@ class VideoPage {
 
                     Utils.onClick('.movieYearPage__info', (event) => {
                         this.loadMovieInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.movieYearPage__enqueue', event => {
+                        Loader.loader();
+                        Api.addPlaylistByMovieId($(event.currentTarget).data('id')).then(result => {
+                            Loader.remove();
+                        });
                     });
                 });
             }
@@ -428,6 +438,11 @@ class VideoPage {
                                 <i class="fa-solid fa-folder-open rowItem__icon"></i>
                                 <span class="rowItem__span">${tvshow.title}</span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn tvShowGenrePage__info" data-id="${tvshow.tvshowid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $('.page5 .content').append(element);
@@ -444,6 +459,10 @@ class VideoPage {
 
                         this.breadcrumb.addItem(title, 5, 5);
                         this.loadSeasonsTVShowsByGenres($element.data('id'), $element.find('.rowItem__span').text());
+                    });
+
+                    Utils.onClick('.tvShowGenrePage__info', event => {
+                        this.loadTVShowTitleInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -500,10 +519,10 @@ class VideoPage {
                                 <span class="rowItem__span">${movie.label}</span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieGenrePage__info" data-id="${movie.movieid}">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieGenrePage__info" data-id="${movie.movieid}" title="${Translation.get('tooltip.info', 'Info')}">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </button>
-                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn movieGenrePage__enqueue" data-id="${movie.movieid}">
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn movieGenrePage__enqueue" data-id="${movie.movieid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
                             </div>
@@ -547,10 +566,10 @@ class VideoPage {
                                 <span class="rowItem__span">${movie.label}</span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieTitle__info" data-id="${movie.movieid}">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn movieTitle__info" data-id="${movie.movieid}" title="${Translation.get('tooltip.info', 'Info')}">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </button>
-                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn movieTitle__enqueue" data-id="${movie.movieid}">
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn movieTitle__enqueue" data-id="${movie.movieid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
                             </div>
@@ -601,7 +620,7 @@ class VideoPage {
                                     <span>${tvshow.rating.toFixed(1)}</span>
                                 </div>
                                 <div class="rowItem__btn-group">
-                                    <button class="tvShowTitle__information rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${tvshow.tvshowid}">
+                                    <button class="tvShowTitle__information rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${tvshow.tvshowid}" title="${Translation.get('tooltip.info', 'Info')}">
                                         <i class="fa-solid fa-circle-info"></i>
                                     </button>
                                 </div>
@@ -629,6 +648,113 @@ class VideoPage {
                     });
                 });
             }
+        });
+    }
+
+    loadEpisodeInformation(id) {
+        Loader.loader();
+        Api.getEpisodeDetailsByEpisodeId(id).then(result => {
+            Loader.remove();
+            const episode = result.result.episodedetails;
+            let body = `
+                <div class="thumb">
+                    <img src="${episode.thumbnail ? Utils.kodiImageToUrl(episode.thumbnail) : 'assets/images/emptyActor.png'}" class="thumbFanart">
+                </div>
+                <div class="textinfo">
+                    <div class="title">
+                        <h1 class="underline">${episode.title}</h1>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">Episodio:</span>
+                        <span class="value">${episode.episode}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">Stagione:</span>
+                        <span class="value">${episode.season}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">Durata:</span>
+                        <span class="value">${Utils.formatTime(episode.runtime)}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">Voti:</span>
+                        <span class="value">
+                            <div class="rating">
+                                ${this.generateStars(episode.rating)}
+                            </div>
+                        </span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">Trasmesso Prima:</span>
+                        <span class="value">${episode.firstaired}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">Ultimo Eseguito:</span>
+                        <span class="value">${episode.playcount}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">Traccia Audio</span>
+                        <span class="value">${this.getChannels(episode.streamdetails.audio)}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">File:</span>
+                        <span class="value">${episode.file}</span>
+                    </div>
+                </div>
+            `;
+
+            new Modal({
+                id: 'modalInformationEpisode',
+                title: Translation.get('information', 'Informations'),
+                body
+            });
+        });
+    }
+
+    loadMusicVideoInformation(id) {
+        Loader.loader();
+        Api.getMusicVideoDetailsByMusicVideoId(id).then(result => {
+            Loader.remove();
+            const musicvideo = result.result.musicvideodetails;
+
+            let body = `
+                <div class="thumb">
+                    <img src="${musicvideo.thumbnail ? Utils.kodiImageToUrl(musicvideo.thumbnail) : 'assets/images/empty_cover_musicvideo.png'}" class="thumbFanart">
+                </div>
+                <div class="textinfo">
+                    <h1 class="underline">${musicvideo.title}</h1>
+                    <div class="movieinfo">
+                        <span class="label">Durata:</span>
+                        <span class="value">${Utils.formatTime(musicvideo.runtime)}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">Generi</span>
+                        <span class="value">${musicvideo.genre.join(', ')}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">Anni di Attività:</span>
+                        <span class="value">${musicvideo.year}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">Registi</span>
+                        <span class="value">${musicvideo.director.join(', ')}</span>
+                    </div>
+                    <div class="movieinfo">
+                        <span class="label">Ultimo Eseguito:</span>
+                        <span class="value">${musicvideo.lastplayed}</span>
+                    </div>
+                    <div class="movieinfo filelink">
+                        <span class="label">File:</span>
+                        <span class="value">${musicvideo.file}</span>
+                    </div>
+                </div>
+            `;
+
+            new Modal({
+                id: 'modalMusicVideoInformation',
+                title: Translation.get('information', 'Informations'),
+                body
+            });
         });
     }
 
@@ -902,8 +1028,13 @@ class VideoPage {
                                 <i class="fa-solid fa-file rowItem__icon"></i>
                                 <span class="rowItem__span">${episode.label}</span>
                             </a>
-                            <div class="tvShowTitle__link__rating rowItem__rating">
-                                ${this.generateStars(episode.rating)}
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn episode__info" data-id="${episode.episodeid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn episode__enqueue" data-id="${episode.episodeid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
                             </div>
                         </div>
                     `;
@@ -912,6 +1043,17 @@ class VideoPage {
                     Utils.onClick('.episode a', (event) => {
                         Loader.loader();
                         Api.playByEpisodeId($(event.currentTarget).data('id')).then((result) => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.episode__info', event => {
+                        this.loadEpisodeInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.episode__enqueue', event => {
+                        Loader.loader();
+                        Api.addPlaylistByEpisodeId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -933,6 +1075,14 @@ class VideoPage {
                                 <i class="fa-solid fa-file rowItem__icon"></i>
                                 <span class="rowItem__span">${episode.showtitle} - ${episode.title}</span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn episode__info" data-id="${episode.episodeid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn episode__enqueue" data-id="${episode.episodeid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $('.page7 .content').append(element);
@@ -940,6 +1090,17 @@ class VideoPage {
                     Utils.onClick('.episode a', (event) => {
                         Loader.loader();
                         Api.playByEpisodeId($(event.currentTarget).data('id')).then((result) => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.episode__info', event => {
+                        this.loadEpisodeInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.episode__enqueue', event => {
+                        Loader.loader();
+                        Api.addPlaylistByEpisodeId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -961,6 +1122,14 @@ class VideoPage {
                                 <i class="fa-solid fa-file rowItem__icon"></i>
                                 <span class="rowItem__span">${episode.showtitle} - ${episode.title}</span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn episode__info" data-id="${episode.episodeid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn episode__enqueue" data-id="${episode.episodeid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $('.page6 .content').append(element);
@@ -968,6 +1137,17 @@ class VideoPage {
                     Utils.onClick('.episode a', (event) => {
                         Loader.loader();
                         Api.playByEpisodeId($(event.currentTarget).data('id')).then((result) => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.episode__info', event => {
+                        this.loadEpisodeInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.episode__enqueue', event => {
+                        Loader.loader();
+                        Api.addPlaylistByEpisodeId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -1043,11 +1223,11 @@ class VideoPage {
                                 <span class="rowItem__span">${file.label}</span>
                             </a>
                             <div class="rowItem__btn-group">
-                                <button class="btnAddPlaylistVideo rowItem__btn-group__btn1 rowItem__btn-group__btn" data-file="${file.file}">
-                                    <i class="fa-solid fa-circle-plus"></i>
-                                </button>
-                                <button class="btnEnqueuePlaylistVideo rowItem__btn-group__btn2 rowItem__btn-group__btn" data-movieid="${file.id}">
+                                <button class="btnEnqueuePlaylistVideo rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${file.id}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
+                                </button>
+                                <button class="btnInfoPlaylistVideo rowItem__btn-group__btn2 rowItem__btn-group__btn" data-id="${file.id}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
                                 </button>
                             </div>
                         </div>
@@ -1061,15 +1241,15 @@ class VideoPage {
                         });
                     });
 
-                    Utils.onClick('.btnAddPlaylistVideo', (event) => {
+                    Utils.onClick('.btnEnqueuePlaylistVideo', (event) => {
                         Loader.loader();
-                        Api.addVideoByFile($(event.currentTarget).data('file')).then((result) => {
+                        Api.addPlaylistByMovieId($(event.currentTarget).data('id')).then((result) => {
                             Loader.remove();
                         });
                     });
 
-                    Utils.onClick('.btnEnqueuePlaylistVideo', (event) => {
-                        Api.addPlaylistByMovieId($(event.currentTarget).data('movieid'));
+                    Utils.onClick('.btnInfoPlaylistVideo', event => {
+                        this.loadMovieInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -1276,6 +1456,14 @@ class VideoPage {
                                 <i class="fa-solid fa-file rowItem__icon"></i>
                                 <span class="rowItem__span">${musicVideo.artist.join(' ')} - ${musicVideo.label}</span>
                             </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn musicVideoTitle__info" data-id="${musicVideo.musicvideoid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn musicVideoTitle__enqueue" data-id="${musicVideo.musicvideoid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
                         </div>
                     `;
                     $(`.page4 .content`).append(element);
@@ -1283,6 +1471,17 @@ class VideoPage {
                     Utils.onClick('.musicVideoTitle a', (event) => {
                         Loader.loader();
                         Api.playByMusicVideoId($(event.currentTarget).data('id')).then((result) => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.musicVideoTitle__info', event => {
+                        this.loadMusicVideoInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.musicVideoTitle__enqueue', event => {
+                        Loader.loader();
+                        Api.addPlaylistByMusicVideoId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });
@@ -1334,19 +1533,36 @@ class VideoPage {
                 musicVideos.forEach((item) => {
                     const element = `
                         <div class="musicVideoValue rowItem">
-                            <div class="musicVideoValue__link">
-                                <a href="#" data-id="${item.musicvideoid}" class="rowItem__link">
-                                    <i class="fa-solid fa-file rowItem__icon"></i>
-                                    <span class="rowItem__span">${item.artist.join(', ')} ${item.title}</span>
-                                </a>
+                            <a href="#" data-id="${item.musicvideoid}" class="rowItem__link">
+                                <i class="fa-solid fa-file rowItem__icon"></i>
+                                <span class="rowItem__span">${item.artist.join(', ')} ${item.title}</span>
+                            </a>
+                            <div class="rowItem__btn-group">
+                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn musicVideoValue__info" data-id="${item.musicvideoid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn musicVideoValue__enqueue" data-id="${item.musicvideoid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
                             </div>
                         </div>
                     `;
                     $('.page5 .content').append(element);
 
-                    Utils.onClick('.musicVideoValue__link a', (event) => {
+                    Utils.onClick('.musicVideoValue a', (event) => {
                         Loader.loader();
                         Api.playByMusicVideoId($(event.currentTarget).data('id')).then((result) => {
+                            Loader.remove();
+                        });
+                    });
+
+                    Utils.onClick('.musicVideoValue__info', event => {
+                        this.loadMusicVideoInformation($(event.currentTarget).data('id'));
+                    });
+
+                    Utils.onClick('.musicVideoValue__enqueue', event => {
+                        Loader.loader();
+                        Api.addPlaylistByMusicVideoId($(event.currentTarget).data('id')).then(result => {
                             Loader.remove();
                         });
                     });

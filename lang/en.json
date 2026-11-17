@@ -6,7 +6,9 @@
     "tooltip": {
         "info": "Informations",
         "enqueue": "Enqueue",
-        "play": "Play"
+        "play": "Play",
+        "songs": "Songs",
+        "add": "Add"
     },
     "alert": {
         "added": "Added Successfully",

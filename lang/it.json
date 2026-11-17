@@ -6,7 +6,9 @@
     "tooltip": {
         "info": "Informazioni",
         "enqueue": "Accoda",
-        "play": "Riproduci"
+        "play": "Riproduci",
+        "songs": "Canzoni",
+        "add": "Aggiungi"
     },
     "alert": {
         "added": "Aggiunto con successo",
