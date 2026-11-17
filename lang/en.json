@@ -109,7 +109,15 @@
             "recordLabel": "Record label",
             "lastPlayed": "Last played",
             "yearactive": "Active years",
-            "albumlabel": "Album"
+            "albumlabel": "Album",
+            "episode": "Episode",
+            "season": "Season",
+            "duration": "Duration",
+            "rating": "Rating",
+            "firstaired": "First start",
+            "audioTrack": "Audio track",
+            "file": "File",
+            "direcotr": "Director"
         },
         "movie": {
             "originaltitle": "Original title",

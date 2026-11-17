@@ -665,19 +665,19 @@ class VideoPage {
                         <h1 class="underline">${episode.title}</h1>
                     </div>
                     <div class="movieinfo">
-                        <span class="label">Episodio:</span>
+                        <span class="label">${Translation.get('gui.info.episode', 'Episode')}:</span>
                         <span class="value">${episode.episode}</span>
                     </div>
                     <div class="movieinfo">
-                        <span class="label">Stagione:</span>
+                        <span class="label">${Translation.get('gui.info.season', 'Season')}:</span>
                         <span class="value">${episode.season}</span>
                     </div>
                     <div class="movieinfo">
-                        <span class="label">Durata:</span>
+                        <span class="label">${Translation.get('gui.info.duration', 'Duration')}:</span>
                         <span class="value">${Utils.formatTime(episode.runtime)}</span>
                     </div>
                     <div class="movieinfo">
-                        <span class="label">Voti:</span>
+                        <span class="label">${Translation.get('gui.info.rating', 'Rating')}:</span>
                         <span class="value">
                             <div class="rating">
                                 ${this.generateStars(episode.rating)}
@@ -685,19 +685,19 @@ class VideoPage {
                         </span>
                     </div>
                     <div class="movieinfo">
-                        <span class="label">Trasmesso Prima:</span>
+                        <span class="label">${Translation.get('gui.info.firstaired', 'First start')}:</span>
                         <span class="value">${episode.firstaired}</span>
                     </div>
                     <div class="movieinfo">
-                        <span class="label">Ultimo Eseguito:</span>
+                        <span class="label">${Translation.get('gui.info.lastPlayed', 'Last played')}:</span>
                         <span class="value">${episode.playcount}</span>
                     </div>
                     <div class="movieinfo">
-                        <span class="label">Traccia Audio</span>
+                        <span class="label">${Translation.get('gui.info.audioTrack', 'Audio track')}</span>
                         <span class="value">${this.getChannels(episode.streamdetails.audio)}</span>
                     </div>
                     <div class="movieinfo">
-                        <span class="label">File:</span>
+                        <span class="label">${Translation.get('gui.info.file', 'File')}:</span>
                         <span class="value">${episode.file}</span>
                     </div>
                 </div>
@@ -724,27 +724,27 @@ class VideoPage {
                 <div class="textinfo">
                     <h1 class="underline">${musicvideo.title}</h1>
                     <div class="movieinfo">
-                        <span class="label">Durata:</span>
+                        <span class="label">${Translation.get('gui.info.duration', 'Duration')}:</span>
                         <span class="value">${Utils.formatTime(musicvideo.runtime)}</span>
                     </div>
                     <div class="movieinfo">
-                        <span class="label">Generi</span>
+                        <span class="label">${Translation.get('gui.info.genre', 'Genres')}</span>
                         <span class="value">${musicvideo.genre.join(', ')}</span>
                     </div>
                     <div class="movieinfo">
-                        <span class="label">Anni di Attività:</span>
+                        <span class="label">${Translation.get('gui.info.year', 'Year')}:</span>
                         <span class="value">${musicvideo.year}</span>
                     </div>
                     <div class="movieinfo">
-                        <span class="label">Registi</span>
+                        <span class="label">${Translation.get('gui.info.director', 'Director')}</span>
                         <span class="value">${musicvideo.director.join(', ')}</span>
                     </div>
                     <div class="movieinfo">
-                        <span class="label">Ultimo Eseguito:</span>
+                        <span class="label">${Translation.get('gui.info.lastPlayed', 'Last played')}:</span>
                         <span class="value">${musicvideo.lastplayed}</span>
                     </div>
                     <div class="movieinfo filelink">
-                        <span class="label">File:</span>
+                        <span class="label">${Translation.get('gui.info.file', 'File')}:</span>
                         <span class="value">${musicvideo.file}</span>
                     </div>
                 </div>

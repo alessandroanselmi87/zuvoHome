@@ -109,7 +109,15 @@
             "recordLabel": "Registrazione",
             "lastPlayed": "Ultima riproduzione",
             "yearactive": "Anni di attività",
-            "albumlabel": "Album"
+            "albumlabel": "Album",
+            "episode": "Episodio",
+            "season": "Stagione",
+            "duration": "Durata",
+            "rating": "Votazione",
+            "firstaired": "Trasmesso",
+            "audioTrack": "Traccia audio",
+            "file": "File",
+            "direcotr": "Registi"
         },
         "movie": {
             "originaltitle": "Titolo originale",
