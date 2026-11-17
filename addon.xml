@@ -23,7 +23,7 @@
     <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
     <source>https://github.com/alessandroanselmi87/zuvoHome</source>
     <assets>
-			<icon>resources/icon.png</icon>
+			<icon>icon.png</icon>
 		</assets>
   </extension>
 </addon>
