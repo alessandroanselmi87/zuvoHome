@@ -1,13 +1,13 @@
 ﻿﻿<?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="webinterface.zuvoHome"
-  version="0.7.8"
+  version="0.0.1"
   name="zuvoHome"
   provider-name="Alessandro Anselmi">
   <requires>
     <import addon="xbmc.json" version="6.0.0"/>
   </requires>
-  <extension point="xbmc.webinterface"/>
+  <extension point="xbmc.webinterface" library="index.html" />
   <extension point="xbmc.addon.metadata">
     <summary lang="it">ZuvoHome - Interfaccia Web basata su Ajax per XBMC</summary>
     <description lang="it">
