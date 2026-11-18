@@ -339,7 +339,7 @@ class MusicPage {
                                 <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn artistsByGenre__enqueue" data-id="${genre.genreid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
-                                <button class="rowItem__btn-group__btn1 rowItem__btn-group__btn artistsByGenre__play" data-id="${genre.genreid}" title="${Translation.get('tooltip.play', 'Play')}">
+                                <button class="rowItem__btn-group__btn2 rowItem__btn-group__btn artistsByGenre__play" data-id="${genre.genreid}" title="${Translation.get('tooltip.play', 'Play')}">
                                     <i class="fa-solid fa-play"></i>
                                 </button>
                             </div>
@@ -1482,7 +1482,7 @@ class MusicPage {
                                 <button class="btnEnqueueSongByYearItem rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
-                                <button class="btnInfoSongByYearItem rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.info', 'Info')}">
+                                <button class="btnInfoSongByYearItem rowItem__btn-group__btn2 rowItem__btn-group__btn" data-id="${song.songid}" title="${Translation.get('tooltip.info', 'Info')}">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </button>
                             </div>
@@ -1529,7 +1529,7 @@ class MusicPage {
                                 <button class="btnEnqueueSongByGenre rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${genre.genreid}" title="${Translation.get('tooltip.enqueue', 'Enqueue')}">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
-                                <button class="btnPlaySongByGenre rowItem__btn-group__btn1 rowItem__btn-group__btn" data-id="${genre.genreid}" title="${Translation.get('tooltip.play', 'Play')}">
+                                <button class="btnPlaySongByGenre rowItem__btn-group__btn2 rowItem__btn-group__btn" data-id="${genre.genreid}" title="${Translation.get('tooltip.play', 'Play')}">
                                     <i class="fa-solid fa-play"></i>
                                 </button>
                             </div>
