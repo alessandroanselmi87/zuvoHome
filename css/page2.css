@@ -455,9 +455,6 @@ body {
 
 @media (max-width: 1000px) {
     .rowItem {
-        grid-template-columns:
-            minmax(150px, 1.2fr) 45px minmax(120px, 1.5fr) 105px 42px;
-
         gap: 12px;
         padding: 10px 12px;
     }
@@ -621,6 +618,7 @@ a:focus-visible {
         min-height: 68px;
         padding: 9px 10px;
         gap: 9px;
+        grid-template-columns: 1fr auto;
     }
 
     .rowItem__link {

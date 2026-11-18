@@ -656,7 +656,6 @@ button:focus-visible,
     }
 
     .rowItem {
-        grid-template-columns: minmax(130px, 1fr) 55px minmax(130px, 2fr) 115px 42px;
         gap: 12px;
     }
 
@@ -759,7 +758,6 @@ button:focus-visible,
 
     .rowItem__btn-group {
         grid-column: 2;
-        grid-row: 3;
     }
 
     .rowItem__btn-group__btn {
@@ -5156,287 +5154,210 @@ button:focus-visible,
    CINEMATIC VIBES DESIGN SYSTEM
 ========================================================= */
 
-/* ========================================
-   TABLE ROW
-======================================== */
 
-.artistByTitlePage.rowItem {
-    display: grid;
-    grid-template-columns: 58px minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 18px;
+/* =========================================================
+   ZUVOHOME - ARTIST BY TITLE
+   CINEMATIC VIBES DESIGN SYSTEM
+========================================================= */
 
-    width: 100%;
-    min-height: 82px;
-    padding: 10px 16px;
+/* =========================================================
+   FIX - ARTIST BY TITLE PAGE
+   OVERRIDE GENERIC ROWITEM RESPONSIVE RULES
+========================================================= */
 
-    background: #211D2B;
-    border: 1px solid #393342;
-    border-radius: 10px;
+/* Layout principale */
 
-    transition:
-        background .2s ease,
-        border-color .2s ease,
-        transform .2s ease,
-        box-shadow .2s ease;
+body .artistByTitlePage.rowItem {
+    display: grid !important;
+    grid-template-columns: 58px minmax(0, 1fr) auto !important;
+    grid-template-rows: minmax(58px, auto) !important;
+
+    align-items: center !important;
+    gap: 15px !important;
+
+    min-height: 82px !important;
+    height: auto !important;
+
+    padding: 12px 16px !important;
 }
 
-/* Hover */
+/* Immagine: prima colonna */
 
-.artistByTitlePage.rowItem:hover {
-    background: #2C2637;
-    border-color: #803047;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, .15);
+body .artistByTitlePage.rowItem>.rowItem__img {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+
+    width: 58px !important;
+    height: 58px !important;
+
+    margin: 0 !important;
+    align-self: center !important;
 }
 
-/* ========================================
-   ARTIST IMAGE
-======================================== */
+/* Link: seconda colonna */
 
-.artistByTitlePage .rowItem__img {
-    display: block;
+body .artistByTitlePage.rowItem>.rowItem__link {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
 
-    width: 58px;
-    height: 58px;
+    display: flex !important;
+    align-items: center !important;
 
-    object-fit: cover;
-    object-position: center;
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
 
-    background: #393342;
-    border: 1px solid #51495D;
-    border-radius: 8px;
+    margin: 0 !important;
+    padding: 0 !important;
 
-    box-shadow: 0 3px 10px rgba(0, 0, 0, .25);
-
-    transition:
-        transform .2s ease,
-        border-color .2s ease;
+    overflow: hidden !important;
+    white-space: nowrap !important;
 }
 
-.artistByTitlePage:hover .rowItem__img {
-    border-color: rgba(240, 91, 97, .5);
-    transform: scale(1.04);
+/* Icona file */
+
+body .artistByTitlePage .rowItem__icon {
+    flex: 0 0 17px !important;
+    width: 17px !important;
+    height: 17px !important;
 }
 
-/* ========================================
-   ARTIST LINK
-======================================== */
+/* Testo */
 
-.artistByTitlePage .rowItem__link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+body .artistByTitlePage .rowItem__span {
+    display: block !important;
 
-    min-width: 0;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: 0 !important;
 
-    color: #EDE7DD;
-    font-size: .95rem;
-    font-weight: 650;
-    line-height: 1.5;
-    text-decoration: none;
-
-    overflow: hidden;
-
-    transition: color .2s ease;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
 }
 
-.artistByTitlePage .rowItem__link:hover {
-    color: #F05B61;
+/* Pulsanti: terza colonna */
+
+body .artistByTitlePage.rowItem>.rowItem__btn-group {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    gap: 6px !important;
 }
 
-/* File icon */
+/* Pulsanti */
 
-.artistByTitlePage .rowItem__icon {
-    flex-shrink: 0;
+body .artistByTitlePage .rowItem__btn-group__btn {
+    flex: 0 0 36px !important;
 
-    width: 17px;
-    height: 17px;
-
-    color: #628F91;
-
-    transition:
-        color .2s ease,
-        transform .2s ease;
-}
-
-.artistByTitlePage .rowItem__link:hover .rowItem__icon {
-    color: #E8AD55;
-    transform: scale(1.1);
-}
-
-/* Artist name */
-
-.artistByTitlePage .rowItem__span {
-    display: block;
-
-    min-width: 0;
-
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    width: 36px !important;
+    height: 36px !important;
 }
 
 /* ========================================
-   BUTTON GROUP
-======================================== */
-
-.artistByTitlePage .rowItem__btn-group {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-}
-
-/* Information button */
-
-.artistByTitlePage .rowItem__btn-group__btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    width: 38px;
-    height: 38px;
-    padding: 0;
-
-    color: #F05B61;
-    background: #393342;
-
-    border: 1px solid transparent;
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    transition:
-        color .2s ease,
-        background .2s ease,
-        border-color .2s ease,
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-/* Icon */
-
-.artistByTitlePage .rowItem__btn-group__btn svg {
-    width: 17px;
-    height: 17px;
-}
-
-/* Hover */
-
-.artistByTitlePage .rowItem__btn-group__btn:hover {
-    color: #FFFFFF;
-    background: #803047;
-    border-color: #F05B61;
-
-    transform: translateY(-2px);
-
-    box-shadow: 0 4px 12px rgba(240, 91, 97, .18);
-}
-
-/* Active */
-
-.artistByTitlePage .rowItem__btn-group__btn:active {
-    transform: scale(.95);
-}
-
-/* Focus */
-
-.artistByTitlePage button:focus-visible,
-.artistByTitlePage a:focus-visible {
-    outline: 2px solid #E8AD55;
-    outline-offset: 3px;
-}
-
-/* ========================================
-   RESPONSIVE - TABLET
-======================================== */
-
-@media (max-width: 768px) {
-
-    .artistByTitlePage.rowItem {
-        grid-template-columns: 54px minmax(0, 1fr) auto;
-        gap: 14px;
-        min-height: 76px;
-        padding: 10px 13px;
-    }
-
-    .artistByTitlePage .rowItem__img {
-        width: 54px;
-        height: 54px;
-    }
-}
-
-/* ========================================
-   RESPONSIVE - MOBILE
+   MOBILE - 600px
 ======================================== */
 
 @media (max-width: 600px) {
 
-    .artistByTitlePage.rowItem {
-        grid-template-columns: 46px minmax(0, 1fr) auto;
-        gap: 10px;
-        min-height: 65px;
-        padding: 9px 11px;
+    body .artistByTitlePage.rowItem {
+        grid-template-columns: 46px minmax(0, 1fr) auto !important;
+        grid-template-rows: minmax(46px, auto) !important;
+
+        gap: 9px !important;
+        min-height: 64px !important;
+
+        padding: 9px 10px !important;
     }
 
-    .artistByTitlePage .rowItem__img {
-        width: 46px;
-        height: 46px;
+    body .artistByTitlePage.rowItem>.rowItem__img {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+
+        width: 46px !important;
+        height: 46px !important;
     }
 
-    .artistByTitlePage .rowItem__link {
-        gap: 8px;
-        font-size: .84rem;
+    body .artistByTitlePage.rowItem>.rowItem__link {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+
+        font-size: 0.82rem !important;
     }
 
-    .artistByTitlePage .rowItem__icon {
-        width: 15px;
-        height: 15px;
+    body .artistByTitlePage.rowItem>.rowItem__btn-group {
+        grid-column: 3 !important;
+        grid-row: 1 !important;
+
+        gap: 5px !important;
     }
 
-    .artistByTitlePage .rowItem__btn-group {
-        gap: 5px;
+    body .artistByTitlePage .rowItem__btn-group__btn {
+        flex-basis: 30px !important;
+
+        width: 30px !important;
+        height: 30px !important;
     }
 
-    .artistByTitlePage .rowItem__btn-group__btn {
-        width: 33px;
-        height: 33px;
-    }
-
-    .artistByTitlePage .rowItem__btn-group__btn svg {
-        width: 14px;
-        height: 14px;
+    body .artistByTitlePage .rowItem__btn-group__btn svg {
+        width: 13px !important;
+        height: 13px !important;
     }
 }
 
 /* ========================================
-   RESPONSIVE - SMALL MOBILE
+   SMALL MOBILE - 380px
 ======================================== */
 
 @media (max-width: 380px) {
 
-    .artistByTitlePage.rowItem {
-        grid-template-columns: 40px minmax(0, 1fr) auto;
-        gap: 8px;
-        padding: 8px;
+    body .artistByTitlePage.rowItem {
+        grid-template-columns: 42px minmax(0, 1fr) auto !important;
+
+        gap: 6px !important;
+        padding: 8px !important;
     }
 
-    .artistByTitlePage .rowItem__img {
-        width: 40px;
-        height: 40px;
+    body .artistByTitlePage.rowItem>.rowItem__img {
+        width: 42px !important;
+        height: 42px !important;
     }
 
-    .artistByTitlePage .rowItem__link {
-        font-size: .78rem;
+    body .artistByTitlePage.rowItem>.rowItem__link {
+        font-size: 0.76rem !important;
     }
 
-    .artistByTitlePage .rowItem__btn-group__btn {
-        width: 30px;
-        height: 30px;
+    body .artistByTitlePage .rowItem__icon {
+        flex-basis: 13px !important;
+        width: 13px !important;
+        height: 13px !important;
+    }
+
+    body .artistByTitlePage.rowItem>.rowItem__btn-group {
+        gap: 4px !important;
+    }
+
+    body .artistByTitlePage .rowItem__btn-group__btn {
+        flex-basis: 27px !important;
+        width: 27px !important;
+        height: 27px !important;
+    }
+
+    body .artistByTitlePage .rowItem__btn-group__btn svg {
+        width: 12px !important;
+        height: 12px !important;
     }
 }
+
+
 
 /* ========================================
    REDUCED MOTION
@@ -5444,8 +5365,10 @@ button:focus-visible,
 
 @media (prefers-reduced-motion: reduce) {
 
-    .artistByTitlePage,
-    .artistByTitlePage * {
+    .artistByTitlePage.rowItem,
+    .artistByTitlePage *,
+    .artistByTitlePage *::before,
+    .artistByTitlePage *::after {
         animation: none !important;
         transition: none !important;
     }
