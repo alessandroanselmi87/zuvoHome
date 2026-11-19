@@ -168,7 +168,7 @@ class MusicPage {
                         `);
 
                         this.breadcrumb.addItem(Translation.get('gui.music.artists.titles', 'Titles'), 4, 4);
-                        this.loadArtistsByTitlePage($(event.currentTarget).data('id'));
+                        this.loadArtistsByTitleList($(event.currentTarget).data('id'));
                     });
 
                     Utils.onClick('.artist__info', (event) => {
@@ -193,7 +193,7 @@ class MusicPage {
         });
     }
 
-    loadArtistsByTitlePage(id) {
+    loadArtistsByTitleList(id) {
         Loader.loader();
         Api.getAlbumsByArtistId(id).then(result => {
             Loader.remove();
@@ -359,7 +359,7 @@ class MusicPage {
                         `);
 
                         this.breadcrumb.addItem(Translation.get('gui.music.artists.genres', 'Genres'), 4, 4);
-                        this.loadGenresPage($element.data('id'), $element.find('span').text());
+                        this.loadGenresList($element.data('id'), $element.find('span').text());
                     });
 
                     Utils.onClick('.artistsByGenre__play', event => {
@@ -380,7 +380,7 @@ class MusicPage {
         })
     }
 
-    loadGenresPage(id, title) {
+    loadGenresList(id, title) {
         Loader.loader();
         Api.getArtistsByGenreId(id).then((result) => {
             Loader.remove();
@@ -422,7 +422,7 @@ class MusicPage {
                         `);
 
                         this.breadcrumb.addItem(title, 5, 5);
-                        this.loadSongsByGenrePage($element.data('id'), $element.find('span').text());
+                        this.loadSongsGenre($element.data('id'), $element.find('span').text());
                     });
 
                     Utils.onClick('.artistByGenrePage__info', event => {
@@ -447,7 +447,7 @@ class MusicPage {
         });
     }
 
-    loadSongsByGenrePage(id, title) {
+    loadSongsGenre(id, title) {
         Loader.loader();
         Api.getAlbumsByArtistId(id).then(result => {
             Loader.remove();
@@ -549,7 +549,7 @@ class MusicPage {
                     });
 
                     Utils.onClick('.songsByAlbumId__info', event => {
-                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
+                        this.loadSongInformation($(event.currentTarget).data('id'));
                     });
 
                     Utils.onClick('.songsByAlbumId__enqueue', event => {
@@ -814,7 +814,7 @@ class MusicPage {
                     });
 
                     Utils.onClick('.btnAddPlaylistYearPageSongInfo', event => {
-                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
+                        this.loadSongInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -985,7 +985,7 @@ class MusicPage {
                     });
 
                     Utils.onClick('.btnAlbumGenreSongsPageInfo', event => {
-                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
+                        this.loadSongInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -1128,7 +1128,7 @@ class MusicPage {
                     });
 
                     Utils.onClick('.songByArtistItem__info', event => {
-                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
+                        this.loadSongInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -1177,7 +1177,7 @@ class MusicPage {
                     });
 
                     Utils.onClick('.btnInfoSongByTitle', event => {
-                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
+                        this.loadSongInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -1336,7 +1336,7 @@ class MusicPage {
                     });
 
                     Utils.onClick('.btnAlbumGenreSongsPageInfo', event => {
-                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
+                        this.loadSongInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -1505,7 +1505,7 @@ class MusicPage {
                     });
 
                     Utils.onClick('.btnInfoSongByYearItem', event => {
-                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
+                        this.loadSongInformation($(event.currentTarget).data('id'));
                     });
                 });
             }
@@ -1604,7 +1604,7 @@ class MusicPage {
                     });
 
                     Utils.onClick('.btnInfoSongByGenreItem', (event) => {
-                        this.loadSongGenreInformation($(event.currentTarget).data('id'));
+                        this.loadSongInformation($(event.currentTarget).data('id'));
                     });
 
                     Utils.onClick('.btnEnqueueSongByGenreItem', event => {
@@ -1618,7 +1618,7 @@ class MusicPage {
         });
     }
 
-    loadSongGenreInformation(id) {
+    loadSongInformation(id) {
         Loader.loader();
         Api.getSongDetailsBySongId(id).then(result => {
             Loader.remove();
