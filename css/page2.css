@@ -496,9 +496,8 @@ body {
     }
 
     .rowItem {
-        grid-template-columns: minmax(0, 1fr) 38px 38px;
+        grid-template-columns: 1fr auto;
         gap: 8px;
-
         min-height: 65px;
         padding: 8px 10px;
     }
