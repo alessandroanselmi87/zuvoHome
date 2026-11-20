@@ -475,9 +475,7 @@ body {
 
 @media (max-width: 760px) {
     .rowItem {
-        grid-template-columns:
-            minmax(130px, 1fr) 42px minmax(100px, 1fr) 42px;
-
+        grid-template-columns: 1fr auto;
         gap: 10px;
     }
 
