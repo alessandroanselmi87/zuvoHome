@@ -7131,3 +7131,104 @@ body .artistByTitlePage .rowItem__btn-group__btn {
         transition: none !important;
     }
 }
+
+
+/* =========================================================
+   ZUVOHOME - STAR RATING
+   CINEMATIC VIBES DESIGN SYSTEM
+========================================================= */
+
+/* Rating container */
+
+#modalInformationMovie .movieinfo .value .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+
+    min-height: 22px;
+
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+/* Base star */
+
+#modalInformationMovie .movieinfo .value .rating .star {
+    position: relative;
+    display: inline-block;
+
+    color: #51495D;
+
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+
+    user-select: none;
+}
+
+/* Filled star */
+
+#modalInformationMovie .movieinfo .value .rating .star-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
+
+    height: 100%;
+
+    color: #E8AD55;
+
+    overflow: hidden;
+    white-space: nowrap;
+
+    pointer-events: none;
+}
+
+/* Subtle glow on filled stars */
+
+#modalInformationMovie .movieinfo .value .rating .star-fill {
+    text-shadow: 0 0 5px rgba(232, 173, 85, 0.18);
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+======================================== */
+
+@media (max-width: 768px) {
+
+    #modalInformationMovie .movieinfo .value .rating {
+        gap: 2px;
+    }
+
+    #modalInformationMovie .movieinfo .value .rating .star {
+        font-size: 19px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    #modalInformationMovie .movieinfo .value .rating {
+        gap: 2px;
+        min-height: 19px;
+    }
+
+    #modalInformationMovie .movieinfo .value .rating .star {
+        font-size: 18px;
+    }
+}
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 380px) {
+
+    #modalInformationMovie .movieinfo .value .rating .star {
+        font-size: 16px;
+    }
+}
